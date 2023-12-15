@@ -1,0 +1,25 @@
+FeatureEnvyDetector	WARN	Finded Feature Envy
+FeatureEnvyDetector	WARN	at C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\WindowsFormsAppHw\WindowsFormsAppHwTests\Model\State\PointerStateTests.cs Line 73
+FeatureEnvyDetector	WARN	 WindowsFormsAppHomework.Tests.PointerStateTests envy Moq.It
+FeatureEnvyDetector	WARN	use list:
+FeatureEnvyDetector	WARN		IsAny
+FeatureEnvyDetector	WARN		IsAny
+FeatureEnvyDetector	WARN	Finded Feature Envy
+FeatureEnvyDetector	WARN	at C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\WindowsFormsAppHw\WindowsFormsAppHwTests\Model\State\PointerStateTests.cs Line 80
+FeatureEnvyDetector	WARN	 WindowsFormsAppHomework.Tests.PointerStateTests envy Moq.It
+FeatureEnvyDetector	WARN	use list:
+FeatureEnvyDetector	WARN		IsAny
+FeatureEnvyDetector	WARN		IsAny
+FeatureEnvyDetector	WARN	Finded Feature Envy
+FeatureEnvyDetector	WARN	at C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\WindowsFormsAppHw\WindowsFormsAppHwTests\Model\ModelTests.cs Line 196
+FeatureEnvyDetector	WARN	 WindowsFormsAppHomework.Tests.ModelTests envy Moq.It
+FeatureEnvyDetector	WARN	use list:
+FeatureEnvyDetector	WARN		IsAny
+FeatureEnvyDetector	WARN		IsAny
+FeatureEnvyDetector	WARN	Finded Feature Envy
+FeatureEnvyDetector	WARN	at C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\WindowsFormsAppHw\WindowsFormsAppHwTests\Model\ModelTests.cs Line 236
+FeatureEnvyDetector	WARN	 WindowsFormsAppHomework.Tests.ModelTests envy Moq.Mock<T>
+FeatureEnvyDetector	WARN	use list:
+FeatureEnvyDetector	WARN		Object
+FeatureEnvyDetector	WARN		Object
+FeatureEnvyDetector	WARN		Setup
