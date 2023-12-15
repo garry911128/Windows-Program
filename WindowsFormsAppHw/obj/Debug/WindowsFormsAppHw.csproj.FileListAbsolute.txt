@@ -1,0 +1,10 @@
+C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHw\bin\Debug\WindowsFormsAppHomework.exe.config
+C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHw\bin\Debug\WindowsFormsAppHomework.exe
+C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHw\bin\Debug\WindowsFormsAppHomework.pdb
+C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHw\obj\Debug\WindowsFormsAppHw.csproj.AssemblyReference.cache
+C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHw\obj\Debug\WindowsFormsAppHomework.Form1.resources
+C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHw\obj\Debug\WindowsFormsAppHomework.Properties.Resources.resources
+C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHw\obj\Debug\WindowsFormsAppHw.csproj.GenerateResource.cache
+C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHw\obj\Debug\WindowsFormsAppHw.csproj.CoreCompileInputs.cache
+C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHw\obj\Debug\WindowsFormsAppHomework.exe
+C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHw\obj\Debug\WindowsFormsAppHomework.pdb
