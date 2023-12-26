@@ -45,15 +45,15 @@ namespace WindowsFormsAppHomework
             this._buttonAdd = new System.Windows.Forms.Button();
             this._groupBoxRight = new System.Windows.Forms.GroupBox();
             this._toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this._toolStripButtonLine = new WindowsFormsAppHomework.BindingToolStripButton();
-            this._toolStripButtonRectangle = new WindowsFormsAppHomework.BindingToolStripButton();
-            this._toolStripButtonEllipse = new WindowsFormsAppHomework.BindingToolStripButton();
-            this._toolStripButtonCursor = new WindowsFormsAppHomework.BindingToolStripButton();
             this._toolStripButtonUndo = new System.Windows.Forms.ToolStripButton();
             this._toolStripButtonRedo = new System.Windows.Forms.ToolStripButton();
             this._splitContainer1 = new System.Windows.Forms.SplitContainer();
             this._splitContainer2 = new System.Windows.Forms.SplitContainer();
             this._panel1 = new WindowsFormsAppHomework.DoubleBufferedPanel();
+            this._toolStripButtonLine = new WindowsFormsAppHomework.BindingToolStripButton();
+            this._toolStripButtonRectangle = new WindowsFormsAppHomework.BindingToolStripButton();
+            this._toolStripButtonEllipse = new WindowsFormsAppHomework.BindingToolStripButton();
+            this._toolStripButtonCursor = new WindowsFormsAppHomework.BindingToolStripButton();
             this._menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridViewRight)).BeginInit();
             this._groupBoxRight.SuspendLayout();
@@ -154,7 +154,7 @@ namespace WindowsFormsAppHomework
             // 
             // _smallSlide
             // 
-            this._smallSlide.Location = new System.Drawing.Point(19, 31);
+            this._smallSlide.Location = new System.Drawing.Point(4, 24);
             this._smallSlide.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this._smallSlide.Name = "_smallSlide";
             this._smallSlide.Size = new System.Drawing.Size(99, 68);
@@ -169,7 +169,7 @@ namespace WindowsFormsAppHomework
             "矩形",
             "線",
             "橢圓形"});
-            this._comboBoxShapeType.Location = new System.Drawing.Point(117, 24);
+            this._comboBoxShapeType.Location = new System.Drawing.Point(100, 22);
             this._comboBoxShapeType.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this._comboBoxShapeType.Name = "_comboBoxShapeType";
             this._comboBoxShapeType.Size = new System.Drawing.Size(121, 23);
@@ -216,43 +216,6 @@ namespace WindowsFormsAppHomework
             this._toolStrip1.Size = new System.Drawing.Size(1328, 27);
             this._toolStrip1.TabIndex = 9;
             this._toolStrip1.Text = "toolStrip1";
-            // 
-            // _toolStripButtonLine
-            // 
-            this._toolStripButtonLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._toolStripButtonLine.Image = global::WindowsFormsAppHomework.Properties.Resources.Line;
-            this._toolStripButtonLine.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._toolStripButtonLine.Name = "_toolStripButtonLine";
-            this._toolStripButtonLine.Size = new System.Drawing.Size(29, 24);
-            this._toolStripButtonLine.Text = "線";
-            // 
-            // _toolStripButtonRectangle
-            // 
-            this._toolStripButtonRectangle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._toolStripButtonRectangle.Image = global::WindowsFormsAppHomework.Properties.Resources.Rectangle;
-            this._toolStripButtonRectangle.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._toolStripButtonRectangle.Name = "_toolStripButtonRectangle";
-            this._toolStripButtonRectangle.Size = new System.Drawing.Size(29, 24);
-            this._toolStripButtonRectangle.Text = "矩形";
-            // 
-            // _toolStripButtonEllipse
-            // 
-            this._toolStripButtonEllipse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._toolStripButtonEllipse.Image = global::WindowsFormsAppHomework.Properties.Resources.Ellipse;
-            this._toolStripButtonEllipse.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._toolStripButtonEllipse.Name = "_toolStripButtonEllipse";
-            this._toolStripButtonEllipse.Size = new System.Drawing.Size(29, 24);
-            this._toolStripButtonEllipse.Text = "橢圓形";
-            // 
-            // _toolStripButtonCursor
-            // 
-            this._toolStripButtonCursor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._toolStripButtonCursor.Image = global::WindowsFormsAppHomework.Properties.Resources.Cursor;
-            this._toolStripButtonCursor.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._toolStripButtonCursor.Name = "_toolStripButtonCursor";
-            this._toolStripButtonCursor.Size = new System.Drawing.Size(29, 24);
-            this._toolStripButtonCursor.Text = "Cursor";
-            this._toolStripButtonCursor.Click += new System.EventHandler(this.ToolStripButtonCursorClick);
             // 
             // _toolStripButtonUndo
             // 
@@ -324,6 +287,43 @@ namespace WindowsFormsAppHomework
             this._panel1.Name = "_panel1";
             this._panel1.Size = new System.Drawing.Size(800, 450);
             this._panel1.TabIndex = 10;
+            // 
+            // _toolStripButtonLine
+            // 
+            this._toolStripButtonLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._toolStripButtonLine.Image = global::WindowsFormsAppHomework.Properties.Resources.Line;
+            this._toolStripButtonLine.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolStripButtonLine.Name = "_toolStripButtonLine";
+            this._toolStripButtonLine.Size = new System.Drawing.Size(29, 24);
+            this._toolStripButtonLine.Text = "線";
+            // 
+            // _toolStripButtonRectangle
+            // 
+            this._toolStripButtonRectangle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._toolStripButtonRectangle.Image = global::WindowsFormsAppHomework.Properties.Resources.Rectangle;
+            this._toolStripButtonRectangle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolStripButtonRectangle.Name = "_toolStripButtonRectangle";
+            this._toolStripButtonRectangle.Size = new System.Drawing.Size(29, 24);
+            this._toolStripButtonRectangle.Text = "矩形";
+            // 
+            // _toolStripButtonEllipse
+            // 
+            this._toolStripButtonEllipse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._toolStripButtonEllipse.Image = global::WindowsFormsAppHomework.Properties.Resources.Ellipse;
+            this._toolStripButtonEllipse.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolStripButtonEllipse.Name = "_toolStripButtonEllipse";
+            this._toolStripButtonEllipse.Size = new System.Drawing.Size(29, 24);
+            this._toolStripButtonEllipse.Text = "橢圓形";
+            // 
+            // _toolStripButtonCursor
+            // 
+            this._toolStripButtonCursor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._toolStripButtonCursor.Image = global::WindowsFormsAppHomework.Properties.Resources.Cursor;
+            this._toolStripButtonCursor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolStripButtonCursor.Name = "_toolStripButtonCursor";
+            this._toolStripButtonCursor.Size = new System.Drawing.Size(29, 24);
+            this._toolStripButtonCursor.Text = "Cursor";
+            this._toolStripButtonCursor.Click += new System.EventHandler(this.ToolStripButtonCursorClick);
             // 
             // Form1
             // 

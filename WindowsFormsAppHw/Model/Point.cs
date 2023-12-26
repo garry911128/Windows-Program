@@ -35,6 +35,7 @@ namespace WindowsFormsAppHomework
             Point other = (Point)instance;
             return X == other.X && Y == other.Y;
         }
+    
     }
 
 }

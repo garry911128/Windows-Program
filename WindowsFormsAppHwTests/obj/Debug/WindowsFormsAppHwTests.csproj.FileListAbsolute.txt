@@ -26,3 +26,14 @@ C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFo
 C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHwTests\obj\Debug\WindowsFormsAppHwTests.csproj.CopyComplete
 C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHwTests\obj\Debug\WindowsFormsAppHwTests.dll
 C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHwTests\obj\Debug\WindowsFormsAppHwTests.pdb
+C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHwTests\bin\Debug\WindowsFormsAppHwTests.dll.config
+C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHwTests\bin\Debug\Appium.Net.dll
+C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHwTests\bin\Debug\Newtonsoft.Json.dll
+C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHwTests\bin\Debug\SeleniumExtras.PageObjects.dll
+C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHwTests\bin\Debug\System.Drawing.Common.dll
+C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHwTests\bin\Debug\WebDriver.dll
+C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHwTests\bin\Debug\WebDriver.Support.dll
+C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHwTests\bin\Debug\Appium.Net.xml
+C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHwTests\bin\Debug\Newtonsoft.Json.xml
+C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHwTests\bin\Debug\WebDriver.xml
+C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHwTests\bin\Debug\WebDriver.Support.xml

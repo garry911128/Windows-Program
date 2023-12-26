@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\DialogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Model\DialogForm.Designer.cs">
+      <DependentUpon>DialogForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DoubleBufferedPanel.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -55,6 +61,7 @@
     <Compile Include="Model\Command\DrawCommand.cs" />
     <Compile Include="Model\Command\ICommand.cs" />
     <Compile Include="Model\Command\MoveCommand.cs" />
+    <Compile Include="Model\Command\ResizeCommand.cs" />
     <Compile Include="Model\Constants.cs" />
     <Compile Include="Model\IGraphics.cs" />
     <Compile Include="Model\State\IState.cs" />
@@ -84,6 +91,9 @@
     </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\DialogForm.resx">
+      <DependentUpon>DialogForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

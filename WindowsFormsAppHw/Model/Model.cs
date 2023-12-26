@@ -80,12 +80,36 @@ namespace WindowsFormsAppHomework
             NotifyObserver();
         }
 
+        // execute DrawCommand
+        public virtual void ExecuteAddCommand(string shapeType, Point topLeftPoint, Point bottomRightPoint)
+        {
+            if (shapeType != null && shapeType != "" && shapeType != Constants.POINTER_MODE_TYPE)
+            {
+                _state = new PointerState(this);
+                Shape newShape = _shapeFactory.CreateShape(shapeType, topLeftPoint, bottomRightPoint.X - topLeftPoint.X, bottomRightPoint.Y - topLeftPoint.Y);
+                AddCommand addCommand = new AddCommand(this, newShape, _shapes.GetShapeListSize());
+                _commandManager.Execute(addCommand, _canvasSize);
+                NotifyObserver();
+            }
+        }
+
         // execute MoveCommand
         public virtual void ExecuteMoveCommand(Point firstPoint, Point endPoint)
         {
-            MoveCommand moveCommand = new MoveCommand(this, GetSelectedShape());
-            _commandManager.Execute(moveCommand, _canvasSize);
-            moveCommand.SetDelta(firstPoint, endPoint);
+            if ( (firstPoint.X != endPoint.X) || (firstPoint.Y != endPoint.Y))
+            {
+                MoveCommand moveCommand = new MoveCommand(this, GetSelectedShape());
+                _commandManager.Execute(moveCommand, _canvasSize);
+                moveCommand.SetDelta(firstPoint, endPoint);
+                NotifyObserver();
+            }
+        }
+
+        // execute MoveCommand
+        public virtual void ExecuteResizeCommand(Point originTopLeftPoint, Point originBottomRightPoint, Point ReleasePoint)
+        {
+            ResizeCommand resizeCommand = new ResizeCommand(this, GetSelectedShape(), originTopLeftPoint, originBottomRightPoint, ReleasePoint);
+            _commandManager.Execute(resizeCommand, _canvasSize);
             NotifyObserver();
         }
 
@@ -157,18 +181,6 @@ namespace WindowsFormsAppHomework
         public virtual void MoveShape(double deltaX, double deltaY)
         {
             _shapes.MovedSelectedShapeByMouse(deltaX, deltaY);
-        }
-
-        // Random generate shape , Add to shape list
-        public void AddShapeListRandom(string shapeType)
-        {
-            if (shapeType != null && shapeType != "" && shapeType != Constants.POINTER_MODE_TYPE)
-            {
-                _state = new PointerState(this);
-                Shape shape = _shapeFactory.CreateShapeRandom(shapeType);
-                _commandManager.Execute(new AddCommand(this, shape, _shapes.GetShapeListSize()), _canvasSize);
-                NotifyObserver();
-            }
         }
 
         // Add to shape list

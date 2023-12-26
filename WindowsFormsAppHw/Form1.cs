@@ -16,6 +16,7 @@ namespace WindowsFormsAppHomework
         private Model _model;
         private PresentationModel.PresentationModel _presentationModel;
         private BindingSource _bindingSource = new BindingSource();
+        private DialogForm _dialog;
 
         public Form1(Model model)
         {
@@ -35,6 +36,7 @@ namespace WindowsFormsAppHomework
             _toolStripButtonUndo.Enabled = false;
             this.KeyPreview = true;
             this.KeyDown += HandleKeyDown;
+            _dialog = new DialogForm();
         }
 
         // Set Cursor
@@ -99,7 +101,8 @@ namespace WindowsFormsAppHomework
         //add new shape
         private void ButtonAddClick(object sender, EventArgs e)
         {
-            _model.AddShapeListRandom(_comboBoxShapeType.Text);
+            _dialog.SetupDialog(_panel1.Size, _comboBoxShapeType.Text, _model);
+            _dialog.ShowDialog();
             UpdateUndoRedoButton();
         }
 

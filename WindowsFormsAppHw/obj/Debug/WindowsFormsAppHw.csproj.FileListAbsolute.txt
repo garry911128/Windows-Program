@@ -8,3 +8,4 @@ C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFo
 C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHw\obj\Debug\WindowsFormsAppHw.csproj.CoreCompileInputs.cache
 C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHw\obj\Debug\WindowsFormsAppHomework.exe
 C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHw\obj\Debug\WindowsFormsAppHomework.pdb
+C:\Users\USER\Desktop\Class\junior\Windows_Program\110590028\110590028\WindowsFormsAppHw\obj\Debug\WindowsFormsAppHomework.DialogForm.resources

@@ -63,25 +63,25 @@ namespace WindowsFormsAppHomework.Tests
         }
 
         // Test Add Random Shape to List
-        [TestMethod]
-        public void TestAdd_Random_Shape_To_List()
-        {
-            Setup();
-            var shapeFactoryMock = new Mock<ShapeFactory>();
-            var shapesMock = new Mock<Shapes>();
-            var mockShape = new Mock<Shape>();
-            var shapeList = new BindingList<Shape> { mockShape.Object };
-            shapesMock.Setup(s => s.GetShapeList).Returns(shapeList);
-            _privateModel.SetField("_shapeFactory", shapeFactoryMock.Object);
-            _privateModel.SetField("_shapes", shapesMock.Object);
-            shapeFactoryMock.Setup(sf => sf.CreateShapeRandom(Constants.RECTANGLE)).Returns(mockShape.Object);
-            shapesMock.Setup(s => s.GetShapeListSize()).Returns(1);
-            model.AddShapeListRandom(Constants.RECTANGLE);
-            var finalShapeCount = model.GetShapeList().Count;
-            Assert.AreEqual(1, finalShapeCount);
-            Assert.AreEqual(1, eventCalled);
-            commandManagerMock.Verify(cm => cm.Execute(It.IsAny<AddCommand>(), It.IsAny<Size>()), Times.Once);
-        }
+        //[TestMethod]
+        //public void TestAdd_Random_Shape_To_List()
+        //{
+        //    Setup();
+        //    var shapeFactoryMock = new Mock<ShapeFactory>();
+        //    var shapesMock = new Mock<Shapes>();
+        //    var mockShape = new Mock<Shape>();
+        //    var shapeList = new BindingList<Shape> { mockShape.Object };
+        //    shapesMock.Setup(s => s.GetShapeList).Returns(shapeList);
+        //    _privateModel.SetField("_shapeFactory", shapeFactoryMock.Object);
+        //    _privateModel.SetField("_shapes", shapesMock.Object);
+        //    shapeFactoryMock.Setup(sf => sf.CreateShapeRandom(Constants.RECTANGLE)).Returns(mockShape.Object);
+        //    shapesMock.Setup(s => s.GetShapeListSize()).Returns(1);
+        //    model.AddShapeListRandom(Constants.RECTANGLE);
+        //    var finalShapeCount = model.GetShapeList().Count;
+        //    Assert.AreEqual(1, finalShapeCount);
+        //    Assert.AreEqual(1, eventCalled);
+        //    commandManagerMock.Verify(cm => cm.Execute(It.IsAny<AddCommand>(), It.IsAny<Size>()), Times.Once);
+        //}
 
         // Test State
         private void TestStateMethodCall(Action action, bool pressedMouseCalled, bool movedMouseCalled, bool releaseMouseCalled)
