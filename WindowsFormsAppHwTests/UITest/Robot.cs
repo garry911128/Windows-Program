@@ -62,6 +62,12 @@ namespace WindowsFormsAppHomework.Tests
             _driver.PerformActions(action);
         }
 
+        // resize window 
+        public void ResizeWindow(int width, int height)
+        {
+            _driver.Manage().Window.Size = new System.Drawing.Size(width, height);
+        }
+
         // Select combox
         public void SelectComboBoxItem(string comboBoxName, string itemName)
         {

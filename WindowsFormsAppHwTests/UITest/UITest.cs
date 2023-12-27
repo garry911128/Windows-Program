@@ -35,7 +35,7 @@ namespace WindowsFormsAppHomework.Tests
         [TestCleanup()]
         public void Teardown()
         {
-           //_robot.ClickButton("關閉");
+           _robot.ClickButton("關閉");
         }
 
         // Move pointer to point
@@ -116,9 +116,9 @@ namespace WindowsFormsAppHomework.Tests
             DrawShape("線", new Point(300, 100), new Point(350, 150));
             string[] expectedData = { "刪除", "線", "(300,100),(350,150)" };
             _robot.AssertDataGridViewRowDataBy("_dataGridViewRight", 0, expectedData);
-            _robot.ClickButton("toolStripButton1");
+            _robot.ClickButton("toolStripButtonUndo");
             _robot.AssertDataGridViewRowCountBy("_dataGridViewRight", 0);
-            _robot.ClickButton("toolStripButton2");
+            _robot.ClickButton("toolStripButtonRedo");
             _robot.AssertDataGridViewRowCountBy("_dataGridViewRight", 1);
             _robot.AssertDataGridViewRowDataBy("_dataGridViewRight", 0, expectedData);
         }
@@ -132,10 +132,10 @@ namespace WindowsFormsAppHomework.Tests
             string[] RedoexpectedData = { "刪除", "矩形", "(300,100),(400,200)" };
             _robot.AssertDataGridViewRowDataBy("_dataGridViewRight", 0, UndoexpectedData);
             ResizeShape(new Point(350, 150), new Point(400, 200));
-            _robot.ClickButton("toolStripButton1");
+            _robot.ClickButton("toolStripButtonUndo");
             _robot.AssertDataGridViewRowCountBy("_dataGridViewRight", 1);
             _robot.AssertDataGridViewRowDataBy("_dataGridViewRight", 0, UndoexpectedData);
-            _robot.ClickButton("toolStripButton2");
+            _robot.ClickButton("toolStripButtonRedo");
             _robot.AssertDataGridViewRowCountBy("_dataGridViewRight", 1);
             _robot.AssertDataGridViewRowDataBy("_dataGridViewRight", 0, RedoexpectedData);
         }
@@ -149,10 +149,10 @@ namespace WindowsFormsAppHomework.Tests
             string[] RedoexpectedData = { "刪除", "橢圓形", "(0,0),(50,50)" };
             _robot.AssertDataGridViewRowDataBy("_dataGridViewRight", 0, UndoexpectedData);
             ResizeShape(new Point(325, 125), new Point(25, 25));
-            _robot.ClickButton("toolStripButton1");
+            _robot.ClickButton("toolStripButtonUndo");
             _robot.AssertDataGridViewRowCountBy("_dataGridViewRight", 1);
             _robot.AssertDataGridViewRowDataBy("_dataGridViewRight", 0, UndoexpectedData);
-            _robot.ClickButton("toolStripButton2");
+            _robot.ClickButton("toolStripButtonRedo");
             _robot.AssertDataGridViewRowCountBy("_dataGridViewRight", 1);
             _robot.AssertDataGridViewRowDataBy("_dataGridViewRight", 0, RedoexpectedData);
         }
@@ -191,6 +191,14 @@ namespace WindowsFormsAppHomework.Tests
             }
         }
 
-
+        // resize window and Recoordinate
+        [TestMethod]
+        public void AssertResizeWindowAndCoordinate()
+        {
+            int width = 800;
+            int height = 600;
+            _robot.ResizeWindow(width, height);
+            Assert.IsTrue(Math.Abs(_canvas.Size.Width / _canvas.Size.Height - 16 / 9) < 0.01);
+        }
     }
 }
