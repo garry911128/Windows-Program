@@ -240,5 +240,12 @@ namespace WindowsFormsAppHomework
             _toolStripButtonRedo.Enabled = _model.IsRedoEnabled;
             _toolStripButtonUndo.Enabled = _model.IsUndoEnabled;
         }
+
+        // Click add slide
+        private void toolStripButtonAddNewSlide_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
