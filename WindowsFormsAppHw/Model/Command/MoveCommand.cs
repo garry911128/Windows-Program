@@ -11,14 +11,16 @@ namespace WindowsFormsAppHomework
     {
         Shape _shape;
         Point _delta;
+        int _slideIndex;
         Model _model;
         Size _canvasSize;
 
-        public MoveCommand(Model model, Shape shape)
+        public MoveCommand(Model model, Shape shape, int slideIndex)
         {
             _shape = shape;
             _delta = new Point(0, 0);
             _model = model;
+            _slideIndex = slideIndex;
         }
 
         //Set delta after no more move shape
@@ -59,5 +61,10 @@ namespace WindowsFormsAppHomework
             _canvasSize = newCanvasSize;
         }
 
+        //get slideIndex
+        public int GetSlideIndex()
+        {
+            return _slideIndex;
+        }
     }
 }

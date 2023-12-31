@@ -20,6 +20,9 @@ namespace WindowsFormsAppHomework
 
         // AdjustnowSize
         void AdjustNowSize(Size canvasSize);
+
+        // get slide
+        int GetSlideIndex();
     }
 
 }

@@ -142,8 +142,8 @@ namespace WindowsFormsAppHomework.Tests
         public void TestDeleteShapeOfStack_NotifyObserver()
         {
             Setup();
-            model.AddShapeToList(new Rectangle(0, 0, 10, 10));
-            model.DeleteShapeOfStack(0);
+            model.AddShapeToList(new Rectangle(0, 0, 10, 10), 0);
+            model.DeleteShapeOfStack(0, 0);
             Assert.AreEqual(0, model.GetShapeList().Count);
             Assert.AreEqual(1, eventCalled);
         }
@@ -203,7 +203,7 @@ namespace WindowsFormsAppHomework.Tests
         {
             Setup();
             Shape shape = new Rectangle(50, 50, 100, 100);
-            model.AddShapeToList(shape);
+            model.AddShapeToList(shape, 0);
             model.SelectShapeByPoint(new Point(75, 75));
             Point initialMousePoint = new Point(150, 150);
             Point newMousePoint = new Point(175, 175);

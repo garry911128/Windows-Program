@@ -102,12 +102,12 @@ namespace WindowsFormsAppHomework
 
         private void notifyTextBoxChanged()
         {
-            Console.WriteLine("top:" + _top + " Left:" + _left + "  Right" + _right + " bottom" + _bottom);
-            Console.WriteLine("1" + (_left >= 0 && _left <= _canvasSize.Width));
-            Console.WriteLine("2" +  (_top >= 0 && _top <= _canvasSize.Height));
-            Console.WriteLine("3" +  (_right >= 0 && _right <= _canvasSize.Width));
-            Console.WriteLine("4" + (_bottom >= 0 && _bottom <= _canvasSize.Height));
-            Console.WriteLine("5" + (_left < _right && _top < _bottom));
+            //Console.WriteLine("top:" + _top + " Left:" + _left + "  Right" + _right + " bottom" + _bottom);
+            //Console.WriteLine("1" + (_left >= 0 && _left <= _canvasSize.Width));
+            //Console.WriteLine("2" +  (_top >= 0 && _top <= _canvasSize.Height));
+            //Console.WriteLine("3" +  (_right >= 0 && _right <= _canvasSize.Width));
+            //Console.WriteLine("4" + (_bottom >= 0 && _bottom <= _canvasSize.Height));
+            //Console.WriteLine("5" + (_left < _right && _top < _bottom));
             if (_left >= 0 && _left <= _canvasSize.Width &&
                 _top >= 0 && _top <= _canvasSize.Height &&
                 _right >= 0 && _right <= _canvasSize.Width &&

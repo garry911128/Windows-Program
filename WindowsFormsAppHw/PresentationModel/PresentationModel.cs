@@ -14,10 +14,11 @@ namespace WindowsFormsAppHomework.PresentationModel
         public event PresentationModelChangedEventHandler _presentationModelChanged;
         public delegate void PresentationModelChangedEventHandler();
         public event PropertyChangedEventHandler PropertyChanged;
-
         public delegate void CursorChangedEventHandler(Cursor cursor);
         public event CursorChangedEventHandler _cursorChanged;
-        
+
+        public event Action<int, Shapes.Action> _pageChanged;
+
         private Model _model;
         private double _firstX;
         private double _firstY;
@@ -26,6 +27,7 @@ namespace WindowsFormsAppHomework.PresentationModel
         private bool _isLineChecked = false;
         private bool _isRectangleChecked = false;
         private bool _isCursorChecked = false;
+        private int _slideIndex = 0;
         private string _hintShapeType = Constants.POINTER_MODE_TYPE;
         private WindowsFormsGraphicsAdaptor _graphics;
 
@@ -128,7 +130,21 @@ namespace WindowsFormsAppHomework.PresentationModel
         {
             _model.HandleKeyDown(keyCode);
         }
-            
+        
+        // handle add page or switch page
+        public void ProcessSlideChange(int index)
+        {
+            _slideIndex = index;
+            _model.SwitchSlide(index);
+        }
+
+        // insert page
+        public void InsertPage(int newSlideIndex)
+        {
+            _slideIndex = newSlideIndex;
+            _model.ExecuteAddPageCommand(newSlideIndex);
+        }
+
         // graphics物件是Paint事件帶進來的，只能在當次Paint使用
         // 而Adaptor又直接使用graphics，這樣DoubleBuffer才能正確運作
         // 因此，Adaptor不能重複使用，每次都要重新new

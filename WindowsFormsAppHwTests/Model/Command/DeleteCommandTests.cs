@@ -19,10 +19,10 @@ namespace WindowsFormsAppHomework.Tests
             var modelMock = new Mock<Model>();
             var shapeMock = new Mock<Shape>();
             int indexOfStack = 1;
-            modelMock.Setup(m => m.DeleteShapeOfStack(indexOfStack));
-            var deleteCommand = new DeleteCommand(modelMock.Object, shapeMock.Object, indexOfStack);
+            modelMock.Setup(m => m.DeleteShapeOfStack(0, indexOfStack));
+            var deleteCommand = new DeleteCommand(modelMock.Object, shapeMock.Object, 0, indexOfStack);
             deleteCommand.DoExecute(It.IsAny<Size>());
-            modelMock.Verify(m => m.DeleteShapeOfStack(indexOfStack), Times.Once);
+            modelMock.Verify(m => m.DeleteShapeOfStack(0, indexOfStack), Times.Once);
         }
 
         [TestMethod]
@@ -31,10 +31,10 @@ namespace WindowsFormsAppHomework.Tests
             var modelMock = new Mock<Model>();
             var shapeMock = new Mock<Shape>();
             int indexOfStack = 1;
-            modelMock.Setup(m => m.AddShapeToList(shapeMock.Object, indexOfStack));
-            var deleteCommand = new DeleteCommand(modelMock.Object, shapeMock.Object, indexOfStack);
+            modelMock.Setup(m => m.AddShapeToList(shapeMock.Object, 0, indexOfStack));
+            var deleteCommand = new DeleteCommand(modelMock.Object, shapeMock.Object, 0, indexOfStack);
             deleteCommand.UndoExecute(It.IsAny<Size>());
-            modelMock.Verify(m => m.AddShapeToList(shapeMock.Object, indexOfStack), Times.Once);
+            modelMock.Verify(m => m.AddShapeToList(shapeMock.Object, 0, indexOfStack), Times.Once);
         }
     }
 }

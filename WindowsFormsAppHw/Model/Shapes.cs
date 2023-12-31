@@ -10,6 +10,13 @@ namespace WindowsFormsAppHomework
 {
     public class Shapes
     {
+        public enum Action
+        {
+            Add,
+            Remove,
+            Switch
+        }
+
         private BindingList<Shape> _shapeList;
         private Shape _selectedShape;
         public Shapes()

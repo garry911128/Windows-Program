@@ -7,19 +7,18 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsAppHomework
 {
-    public class AddCommand : ICommand
+    public class AddPageCommand : ICommand
     {
-        Shape _shape;
+        Shapes _shapes;
         Model _model;
-        int _indexOfStack;
         int _slideIndex;
         Size _canvasSize;
 
-        public AddCommand(Model model, Shape shape, int slideIndex, int indexOfStack)
+        public AddPageCommand(Model model, Shapes shapes, int slideIndex)
         {
-            _shape = shape;
+            Console.WriteLine("Add page init" + slideIndex);
+            _shapes = shapes;
             _model = model;
-            _indexOfStack = indexOfStack;
             _slideIndex = slideIndex;
         }
 
@@ -27,14 +26,15 @@ namespace WindowsFormsAppHomework
         public void DoExecute(Size nowSize)
         {
             AdjustNowSize(nowSize);
-            _model.AddShapeToList(_shape, _slideIndex, _indexOfStack);
+            _model.InsertPage(_slideIndex, _shapes);
         }
 
         // unexecute undo
         public void UndoExecute(Size nowSize)
         {
             SetSize(nowSize);
-            _model.DeleteShapeOfStack(_slideIndex, _indexOfStack);
+            Console.WriteLine("Add Page Undo, silde Index:" +  _slideIndex);
+            _model.DeletePage(_slideIndex, _shapes);
         }
 
         // Set Size
@@ -46,7 +46,7 @@ namespace WindowsFormsAppHomework
         // new Size
         public void AdjustNowSize(Size newCanvasSize)
         {
-            _shape.SetPanelSize(newCanvasSize, _canvasSize);
+            _shapes.SetPanelSize(newCanvasSize, _canvasSize);
             _canvasSize = newCanvasSize;
         }
 

@@ -11,6 +11,7 @@ namespace WindowsFormsAppHomework
     {
         Stack<ICommand> _undo = new Stack<ICommand>();
         Stack<ICommand> _redo = new Stack<ICommand>();
+        int _currentSlide = 0; 
 
         // execute
         public virtual void Execute(ICommand command, Size nowSize)
@@ -27,7 +28,9 @@ namespace WindowsFormsAppHomework
             if (_undo.Count <= 0)
                 throw new Exception(Constants.CAN_NOT_UNDO);
             ICommand command = _undo.Pop();
+            Console.WriteLine("undo type" + command.GetType());
             _redo.Push(command);
+            _currentSlide = command.GetSlideIndex();
             command.UndoExecute(nowSize);
         }
 
@@ -38,6 +41,7 @@ namespace WindowsFormsAppHomework
                 throw new Exception(Constants.CAN_NOT_REDO);
             ICommand command = _redo.Pop();
             _undo.Push(command);
+            _currentSlide = command.GetSlideIndex();
             command.DoExecute(nowSize);
         }
 
@@ -57,5 +61,10 @@ namespace WindowsFormsAppHomework
             }
         }
 
+        // get the slide change
+        public virtual int GetCommandSlideIndex()
+        {
+            return _currentSlide;
+        }
     }
 }

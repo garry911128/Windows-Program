@@ -53,9 +53,9 @@ namespace WindowsFormsAppHomework
             this._toolStripButtonUndo = new System.Windows.Forms.ToolStripButton();
             this._toolStripButtonRedo = new System.Windows.Forms.ToolStripButton();
             this._splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this._splitContainer2 = new System.Windows.Forms.SplitContainer();
             this._panel1 = new WindowsFormsAppHomework.DoubleBufferedPanel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this._menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridViewRight)).BeginInit();
             this._groupBoxRight.SuspendLayout();
@@ -64,11 +64,11 @@ namespace WindowsFormsAppHomework
             this._splitContainer1.Panel1.SuspendLayout();
             this._splitContainer1.Panel2.SuspendLayout();
             this._splitContainer1.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._splitContainer2)).BeginInit();
             this._splitContainer2.Panel1.SuspendLayout();
             this._splitContainer2.Panel2.SuspendLayout();
             this._splitContainer2.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // _contextMenuStrip1
@@ -160,7 +160,7 @@ namespace WindowsFormsAppHomework
             this._smallSlide.Location = new System.Drawing.Point(3, 2);
             this._smallSlide.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this._smallSlide.Name = "_smallSlide";
-            this._smallSlide.Size = new System.Drawing.Size(99, 68);
+            this._smallSlide.Size = new System.Drawing.Size(89, 73);
             this._smallSlide.TabIndex = 4;
             this._smallSlide.UseVisualStyleBackColor = true;
             // 
@@ -305,9 +305,19 @@ namespace WindowsFormsAppHomework
             // 
             this._splitContainer1.Panel2.Controls.Add(this._splitContainer2);
             this._splitContainer1.Size = new System.Drawing.Size(1328, 614);
-            this._splitContainer1.SplitterDistance = 106;
+            this._splitContainer1.SplitterDistance = 113;
             this._splitContainer1.TabIndex = 11;
             this._splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.AdjustLeftSideSplitContainer);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.Controls.Add(this._smallSlide);
+            this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 22);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(95, 77);
+            this.flowLayoutPanel1.TabIndex = 12;
             // 
             // _splitContainer2
             // 
@@ -326,8 +336,8 @@ namespace WindowsFormsAppHomework
             // 
             this._splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this._splitContainer2.Panel2.Controls.Add(this._groupBoxRight);
-            this._splitContainer2.Size = new System.Drawing.Size(1218, 614);
-            this._splitContainer2.SplitterDistance = 987;
+            this._splitContainer2.Size = new System.Drawing.Size(1211, 614);
+            this._splitContainer2.SplitterDistance = 980;
             this._splitContainer2.TabIndex = 0;
             this._splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.AdjustRightSideSplitContainer);
             // 
@@ -338,14 +348,6 @@ namespace WindowsFormsAppHomework
             this._panel1.Name = "_panel1";
             this._panel1.Size = new System.Drawing.Size(800, 450);
             this._panel1.TabIndex = 10;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Controls.Add(this._smallSlide);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(4, 22);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(104, 94);
-            this.flowLayoutPanel1.TabIndex = 12;
             // 
             // Form1
             // 
@@ -366,14 +368,15 @@ namespace WindowsFormsAppHomework
             this._toolStrip1.ResumeLayout(false);
             this._toolStrip1.PerformLayout();
             this._splitContainer1.Panel1.ResumeLayout(false);
+            this._splitContainer1.Panel1.PerformLayout();
             this._splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._splitContainer1)).EndInit();
             this._splitContainer1.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
             this._splitContainer2.Panel1.ResumeLayout(false);
             this._splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this._splitContainer2)).EndInit();
             this._splitContainer2.ResumeLayout(false);
-            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

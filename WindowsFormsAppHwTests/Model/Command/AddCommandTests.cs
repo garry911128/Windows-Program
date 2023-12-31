@@ -21,13 +21,13 @@ namespace WindowsFormsAppHomework.Tests
             var shapeMock = new Mock<Shape>();
             int indexOfStack = 1;
 
-            var addCommand = new AddCommand(modelMock.Object, shapeMock.Object, indexOfStack);
+            var addCommand = new AddCommand(modelMock.Object, shapeMock.Object, 0, indexOfStack);
 
             // Act
             addCommand.DoExecute(It.IsAny<Size>());
 
             // Assert
-            modelMock.Verify(m => m.AddShapeToList(shapeMock.Object, indexOfStack), Times.Once);
+            modelMock.Verify(m => m.AddShapeToList(shapeMock.Object, 0, indexOfStack), Times.Once);
         }
 
         [TestMethod]
@@ -38,13 +38,13 @@ namespace WindowsFormsAppHomework.Tests
             var shapeMock = new Mock<Shape>();
             int indexOfStack = 1;
 
-            var addCommand = new AddCommand(modelMock.Object, shapeMock.Object, indexOfStack);
+            var addCommand = new AddCommand(modelMock.Object, shapeMock.Object, 0, indexOfStack);
 
             // Act
             addCommand.UndoExecute(It.IsAny<Size>());
 
             // Assert
-            modelMock.Verify(m => m.DeleteShapeOfStack(indexOfStack), Times.Once);
+            modelMock.Verify(m => m.DeleteShapeOfStack(0, indexOfStack), Times.Once);
         }
     }
 }

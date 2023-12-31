@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Command\AddPageCommand.cs" />
+    <Compile Include="Model\Command\DeletePageCommand.cs" />
     <Compile Include="Model\DialogForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +66,7 @@
     <Compile Include="Model\Command\ResizeCommand.cs" />
     <Compile Include="Model\Constants.cs" />
     <Compile Include="Model\IGraphics.cs" />
+    <Compile Include="Model\Pages.cs" />
     <Compile Include="Model\State\IState.cs" />
     <Compile Include="Model\State\DrawingState.cs" />
     <Compile Include="Model\Ellipse.cs" />

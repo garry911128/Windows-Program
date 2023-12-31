@@ -14,6 +14,7 @@ namespace WindowsFormsAppHomework
         Point _originTopLeftPoint;
         Point _originBottomRightPoint;
         Point _mouseReleasePoint;
+        int _slideIndex;
         Size _canvasSize;
 
         public ResizeCommand(Model model, Shape shape, Point originTopLeftPoint, Point originBottomRightPoint, Point mouseReleasePoint)
@@ -39,6 +40,12 @@ namespace WindowsFormsAppHomework
             SetSize(nowSize);
         }
 
+        //SetSlideIndex
+        public void SetSlideIndex(int slideIndex)
+        {
+            _slideIndex = slideIndex;
+        }
+
         // Set Size
         public void SetSize(Size canvasSize)
         {
@@ -52,5 +59,10 @@ namespace WindowsFormsAppHomework
             _canvasSize = newCanvasSize;
         }
 
+        //get slideIndex
+        public int GetSlideIndex()
+        {
+            return _slideIndex;
+        }
     }
 }

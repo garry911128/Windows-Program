@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using WindowsFormsAppHomework.PresentationModel;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace WindowsFormsAppHomework
 {
@@ -17,6 +18,7 @@ namespace WindowsFormsAppHomework
         public delegate void ModelChangedEventHandler();
         private ShapeFactory _shapeFactory;
         private Shapes _shapes;
+        private Pages _pages;
         private Shape _hint;
         private CommandManager _commandManager;
         Size _canvasSize;
@@ -44,9 +46,17 @@ namespace WindowsFormsAppHomework
             }
         }
 
+        public virtual int SlideIndex
+        {
+            get; set;
+        }
+
         public Model()
         {
             _shapes = new Shapes();
+            _pages = new Pages();
+            _pages.Add(_shapes);
+            SlideIndex = 0;
             _shapeFactory = new ShapeFactory(); //Point topLeftPoint,double width,double height
             _state = new PointerState(this);
             _commandManager = new CommandManager();
@@ -58,10 +68,43 @@ namespace WindowsFormsAppHomework
             _state = state;
         }
 
+        // press new slide button or old slide will base index to change
+        public virtual void SwitchSlide(int slideIndex)
+        {
+            Debug.Assert(slideIndex < _pages.Count);
+            SlideIndex = slideIndex;
+            NotifyObserver();
+        }
+
+        // insert a shapes 
+        public virtual void InsertPage(int slideIndex, Shapes shapes)
+        {
+            SlideIndex = slideIndex;
+            _pages.Insert(slideIndex, shapes);
+            NotifyObserver();
+        }
+
+        // delete a shapes
+        public virtual void DeletePage(int slideIndex, Shapes shapes)
+        {
+            _pages.Remove(shapes);
+            Console.WriteLine("In Model , now slide Index:" + SlideIndex);
+            Console.WriteLine("In Model , now pages Count:" + _pages.Count);
+            if (slideIndex == _pages.Count)
+            {
+                SlideIndex = slideIndex - 1 ;
+            }
+            Console.WriteLine("In Model , now slide Index:" +  SlideIndex);
+            NotifyObserver();
+        }
+
         //undo
         public virtual void Undo()
         {
+            Console.WriteLine("In Model Undo , slide Index:" + SlideIndex);
+            Console.WriteLine("In Model Undo , pages count" +  _pages.Count);
             _commandManager.Undo(_canvasSize);
+            //_pageChanged(_commandManager.GetCommandSlideIndex());
             NotifyObserver();
         }
 
@@ -69,13 +112,23 @@ namespace WindowsFormsAppHomework
         public virtual void Redo()
         {
             _commandManager.Redo(_canvasSize);
+            //_pageChanged(_commandManager.GetCommandSlideIndex());
+            NotifyObserver();
+        }
+
+        // execute DrawCommand
+        public virtual void ExecuteAddPageCommand(int newSlideIndex)
+        {
+            Console.WriteLine("Add page command Execute");
+            AddPageCommand addPageCommand = new AddPageCommand(this, new Shapes(), newSlideIndex);
+            _commandManager.Execute(addPageCommand, _canvasSize);
             NotifyObserver();
         }
 
         // execute DrawCommand
         public virtual void ExecuteDrawCommand()
         {
-            DrawCommand drawCommand = new DrawCommand(this, _hint, _shapes.GetShapeListSize());
+            DrawCommand drawCommand = new DrawCommand(this, _hint, SlideIndex, _pages[SlideIndex].GetShapeListSize());
             _commandManager.Execute(drawCommand, _canvasSize);
             NotifyObserver();
         }
@@ -87,7 +140,7 @@ namespace WindowsFormsAppHomework
             {
                 _state = new PointerState(this);
                 Shape newShape = _shapeFactory.CreateShape(shapeType, topLeftPoint, bottomRightPoint.X - topLeftPoint.X, bottomRightPoint.Y - topLeftPoint.Y);
-                AddCommand addCommand = new AddCommand(this, newShape, _shapes.GetShapeListSize());
+                AddCommand addCommand = new AddCommand(this, newShape, SlideIndex, _shapes.GetShapeListSize());
                 _commandManager.Execute(addCommand, _canvasSize);
                 NotifyObserver();
             }
@@ -98,7 +151,7 @@ namespace WindowsFormsAppHomework
         {
             if ( (firstPoint.X != endPoint.X) || (firstPoint.Y != endPoint.Y))
             {
-                MoveCommand moveCommand = new MoveCommand(this, GetSelectedShape());
+                MoveCommand moveCommand = new MoveCommand(this, GetSelectedShape(), SlideIndex);
                 _commandManager.Execute(moveCommand, _canvasSize);
                 moveCommand.SetDelta(firstPoint, endPoint);
                 NotifyObserver();
@@ -109,6 +162,7 @@ namespace WindowsFormsAppHomework
         public virtual void ExecuteResizeCommand(Point originTopLeftPoint, Point originBottomRightPoint, Point ReleasePoint)
         {
             ResizeCommand resizeCommand = new ResizeCommand(this, GetSelectedShape(), originTopLeftPoint, originBottomRightPoint, ReleasePoint);
+            resizeCommand.SetSlideIndex(SlideIndex);
             _commandManager.Execute(resizeCommand, _canvasSize);
             NotifyObserver();
         }
@@ -116,7 +170,7 @@ namespace WindowsFormsAppHomework
         // execute DeleteCommand
         public virtual void ExecuteDeleteCommand(int index)
         {
-            DeleteCommand drawCommand = new DeleteCommand(this, _shapes.GetShapeList[index], index);
+            DeleteCommand drawCommand = new DeleteCommand(this, _pages[SlideIndex].GetShapeList[index], SlideIndex, index);
             _commandManager.Execute(drawCommand, _canvasSize);
             NotifyObserver();
         }
@@ -162,7 +216,7 @@ namespace WindowsFormsAppHomework
         //get shape name
         public BindingList<Shape> GetShapeList()
         {
-            return _shapes.GetShapeList;
+            return _pages[SlideIndex].GetShapeList;
         }
 
         // Model Select a shape by point
@@ -184,9 +238,9 @@ namespace WindowsFormsAppHomework
         }
 
         // Add to shape list
-        public virtual void AddShapeToList(Shape shape, int indexOfStack = -1)
+        public virtual void AddShapeToList(Shape shape, int slideIndex, int indexOfStack = -1)
         {
-            _shapes.IncreaseShapeToList(shape, indexOfStack);
+            _pages[slideIndex].IncreaseShapeToList(shape, indexOfStack);
             _hint = null;
         }
 
@@ -211,9 +265,9 @@ namespace WindowsFormsAppHomework
         }
 
         //delete expected row
-        public virtual void DeleteShapeOfStack(int indexOfRow)
+        public virtual void DeleteShapeOfStack(int slideIndex, int indexOfRow)
         {
-            _shapes.DeleteShape(indexOfRow);
+            _pages[slideIndex].DeleteShape(indexOfRow);
             NotifyObserver();
         }
 
@@ -225,7 +279,7 @@ namespace WindowsFormsAppHomework
             {
                 _hint.Draw(graphics);
             }
-            foreach (Shape aShape in _shapes.GetShapeList)
+            foreach (Shape aShape in _pages[SlideIndex].GetShapeList)
             {
                 aShape.Draw(graphics);
             }
