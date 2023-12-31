@@ -27,6 +27,7 @@ namespace WindowsFormsAppHomework
             _model._modelChanged += UpdateView;
             // _presentationModel._presentationModelChanged += UpdateView;
             _presentationModel._cursorChanged += SetCursor;
+            _model._pageChanged += HandlePageChange;
             SetDataGridView();
             SetCanvas();
             SetToolStripButton();
@@ -297,55 +298,71 @@ namespace WindowsFormsAppHomework
             _dataGridViewRight.DataSource = _model.GetShapeList();
         }
 
-        //// process add page
-        //private void HandleAddSlide(int index)
-        //{
-        //    Button button = GetNewSlideButton();
-        //    flowLayoutPanel1.Controls.Add(button);
-        //    flowLayoutPanel1.Controls.SetChildIndex(button, index);
-        //    button.Focus();
-        //    _presentationModel.ProcessSlideChange(index);
-        //    _dataGridViewRight.DataSource = _model.GetShapeList();
-        //}
+        public void HandlePageChange(int slideIndex, Shapes.Action actionType)
+        {
+            switch (actionType)
+            {
+                case Shapes.Action.Add:
+                    HandleAddSlide(slideIndex);
+                    break;
+                case Shapes.Action.Remove:
+                    HandleRemovePage(slideIndex);
+                    break;
+                case Shapes.Action.Switch:
+                    HandleSwitchPage(slideIndex);
+                    break;
+            }
+            flowLayoutPanel1.PerformLayout();
+            UpdateView();
+            GenerateBrief();
+        }
 
-        //// get new slide button
-        //public Button GetNewSlideButton()
-        //{
-        //    Button button = new Button();
-        //    double panel1Width = _flowLayoutPanel.Width;
-        //    button.Width = (int)panel1Width - (_flowLayoutPanel.Padding.Horizontal + button.Margin.Horizontal);
-        //    button.Height = (int)(button.Width / Constant.SLIDE_RATIO);
-        //    button.BackColor = Color.White;
-        //    button.BackgroundImageLayout = ImageLayout.Stretch;
-        //    button.Name = Constant.SLIDE;
-        //    button.Click += HandleSlideButtonClick;
-        //    return button;
-        //}
+        // process add page
+        private void HandleAddSlide(int index)
+        {
+            Button button = GetNewSlideButton();
+            flowLayoutPanel1.Controls.Add(button);
+            flowLayoutPanel1.Controls.SetChildIndex(button, index);
+            button.Focus();
+            _presentationModel.ProcessSlideChange(index);
+            _dataGridViewRight.DataSource = _model.GetShapeList();
+        }
 
-        //// process move page
-        //private void ProcessRemovePage(int index)
-        //{
-        //    if (SlideIndex == _flowLayoutPanel.Controls.Count - 1)
-        //        SlideIndex--;
-        //    _flowLayoutPanel.Controls.RemoveAt(index);
-        //    _presentationModel.SlideIndex = SlideIndex;
-        //    if (SlideIndex == -1)
-        //    {
-        //        DisableControl();
-        //        return;
-        //    }
-        //    _flowLayoutPanel.Controls[SlideIndex].Focus();
-        //    _shapeGridView.DataSource = _presentationModel.Shapes;
-        //}
+        // get new slide button
+        public Button GetNewSlideButton()
+        {
+            Button button = new Button();
+            double panel1Width = flowLayoutPanel1.Width;
+            var width = _splitContainer1.Panel1.Width - _splitContainer1.Panel1.Margin.Horizontal;
+            var height = (int)(_splitContainer1.Panel1.Width * Constants.WINDOWS_RATIO);
+            button.Width = width;
+            button.Height = height;
+            //button.BackColor = Color.White;
+            button.BackgroundImageLayout = ImageLayout.Stretch;
+            button.Click += HandleClickPage;
+            return button;
+        }
 
-        //// process switch page
-        //private void ProcessSwitchPage(int index)
-        //{
-        //    SlideIndex = index;
-        //    _presentationModel.SlideIndex = SlideIndex;
-        //    _shapeGridView.DataSource = _presentationModel.Shapes;
-        //    _flowLayoutPanel.Controls[SlideIndex].Focus();
+        // process move page
+        private void HandleRemovePage(int SlideIndex)
+        {
+            flowLayoutPanel1.Controls.RemoveAt(SlideIndex);
+            _model.SlideIndex = SlideIndex;
+            if (SlideIndex == -1)
+            {
+                return;
+            }
+            flowLayoutPanel1.Controls[SlideIndex].Focus();
+            _dataGridViewRight.DataSource = _model.GetShapeList();
+        }
 
-        //}
+        // process switch page
+        private void HandleSwitchPage(int SlideIndex)
+        {
+            _model.SlideIndex = SlideIndex;
+            _dataGridViewRight.DataSource = _model.GetShapeList();
+            flowLayoutPanel1.Controls[SlideIndex].Focus();
+
+        }
     }
 }

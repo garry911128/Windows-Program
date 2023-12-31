@@ -17,8 +17,6 @@ namespace WindowsFormsAppHomework.PresentationModel
         public delegate void CursorChangedEventHandler(Cursor cursor);
         public event CursorChangedEventHandler _cursorChanged;
 
-        public event Action<int, Shapes.Action> _pageChanged;
-
         private Model _model;
         private double _firstX;
         private double _firstY;

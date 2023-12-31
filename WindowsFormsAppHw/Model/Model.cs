@@ -16,6 +16,7 @@ namespace WindowsFormsAppHomework
     {
         public event ModelChangedEventHandler _modelChanged;
         public delegate void ModelChangedEventHandler();
+        public event Action<int, Shapes.Action> _pageChanged;
         private ShapeFactory _shapeFactory;
         private Shapes _shapes;
         private Pages _pages;
@@ -81,6 +82,7 @@ namespace WindowsFormsAppHomework
         {
             SlideIndex = slideIndex;
             _pages.Insert(slideIndex, shapes);
+            _pageChanged(SlideIndex, Shapes.Action.Add);
             NotifyObserver();
         }
 
@@ -121,6 +123,15 @@ namespace WindowsFormsAppHomework
         {
             Console.WriteLine("Add page command Execute");
             AddPageCommand addPageCommand = new AddPageCommand(this, new Shapes(), newSlideIndex);
+            _commandManager.Execute(addPageCommand, _canvasSize);
+            NotifyObserver();
+        }
+
+        // execute DrawCommand
+        public virtual void ExecuteDeletePageCommand(int newSlideIndex)
+        {
+            Console.WriteLine("Delete page command Execute");
+            DeletePageCommand addPageCommand = new DeletePageCommand(this, _pages[SlideIndex], newSlideIndex);
             _commandManager.Execute(addPageCommand, _canvasSize);
             NotifyObserver();
         }
@@ -199,11 +210,15 @@ namespace WindowsFormsAppHomework
         // On KeyDown
         public virtual void HandleKeyDown(Keys keyCode)
         {
-            if (keyCode == Keys.Delete && _shapes.GetSelectedShape() != null)
+            if (keyCode == Keys.Delete && _pages[SlideIndex].GetSelectedShape() != null)
             {
-                int index = _shapes.GetShapeList.IndexOf(_shapes.GetSelectedShape());
+                int index = _pages[SlideIndex].GetShapeList.IndexOf(_pages[SlideIndex].GetSelectedShape());
                 ExecuteDeleteCommand(index);
                 NotifyObserver();
+            }
+            else if(keyCode == Keys.Delete && _pages[SlideIndex].GetSelectedShape() == null)
+            {
+                ExecuteDeletePageCommand(SlideIndex);
             }
         }
 
