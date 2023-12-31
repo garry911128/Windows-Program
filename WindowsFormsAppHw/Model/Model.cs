@@ -210,7 +210,7 @@ namespace WindowsFormsAppHomework
         // Get Base Point
         public virtual Shape GetSelectedShape()
         {
-            return _shapes.GetSelectedShape();
+            return _pages[SlideIndex].GetSelectedShape();
         }
 
         //get shape name
@@ -222,19 +222,19 @@ namespace WindowsFormsAppHomework
         // Model Select a shape by point
         public virtual bool SelectShapeByPoint(Point nowPoint)
         {
-            return _shapes.SelectedShapeByPoint(nowPoint);
+            return _pages[SlideIndex].SelectedShapeByPoint(nowPoint);
         }
 
         //Model Get Select and Handle
         public virtual bool IsPointInSelectedShapeHandle(Point mousePoint)
         {
-            return _shapes.IsPointInSelectedShapeHandle(mousePoint);
+            return _pages[SlideIndex].IsPointInSelectedShapeHandle(mousePoint);
         }
 
         // Move Shape
         public virtual void MoveShape(double deltaX, double deltaY)
         {
-            _shapes.MovedSelectedShapeByMouse(deltaX, deltaY);
+            _pages[SlideIndex].MovedSelectedShapeByMouse(deltaX, deltaY);
         }
 
         // Add to shape list
@@ -259,7 +259,7 @@ namespace WindowsFormsAppHomework
             }
             else
             {
-                _shapes.ResizeSelectedShape(basePoint, mousePoint);
+                _pages[SlideIndex].ResizeSelectedShape(basePoint, mousePoint);
             }
             NotifyObserver();
         }
@@ -299,7 +299,7 @@ namespace WindowsFormsAppHomework
         {
             if (_canvasSize != Size.Empty)
             {
-                _shapes.SetPanelSize(newSize, _canvasSize);
+                _pages[SlideIndex].SetPanelSize(newSize, _canvasSize);
             }
             _canvasSize = new Size(newSize.Width, newSize.Height);
             NotifyObserver();

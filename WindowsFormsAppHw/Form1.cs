@@ -17,6 +17,7 @@ namespace WindowsFormsAppHomework
         private PresentationModel.PresentationModel _presentationModel;
         private BindingSource _bindingSource = new BindingSource();
         private DialogForm _dialog;
+        private Bitmap _brief;
 
         public Form1(Model model)
         {
@@ -87,6 +88,7 @@ namespace WindowsFormsAppHomework
             _panel1.Paint += HandleCanvasPaint;
             _smallSlide.Paint += HandleButtonPaint;
             SizeChanged += CanvasSizeChanged;
+            _brief = new Bitmap(this._panel1.Width, this._panel1.Height);
             CanvasSizeChanged(this, null); // lazy resize
         }
 
@@ -161,13 +163,14 @@ namespace WindowsFormsAppHomework
         // Button Paint
         public void HandleButtonPaint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
-            _presentationModel.DrawOnButton(e.Graphics, _smallSlide.Size, _panel1.Size);
+            //_presentationModel.DrawOnButton(e.Graphics, _smallSlide.Size, _panel1.Size);
         }
 
         // update view
         public void UpdateView()
         {
             Invalidate(true);
+            GenerateBrief();
         }
 
         // undo
@@ -258,21 +261,30 @@ namespace WindowsFormsAppHomework
             _toolStripButtonUndo.Enabled = _model.IsUndoEnabled;
         }
 
+        // generate brief
+        private void GenerateBrief()
+        {
+            _brief = new Bitmap(this._panel1.Width, this._panel1.Height);
+            this._panel1.DrawToBitmap(_brief, new System.Drawing.Rectangle(0, 0, this._panel1.Width, this._panel1.Height));
+            flowLayoutPanel1.Controls[_model.SlideIndex].BackgroundImage = new Bitmap(_brief, flowLayoutPanel1.Controls[_model.SlideIndex].Size);
+        }
+
         // Click add slide
         private void toolStripButtonAddNewSlide_Click(object sender, EventArgs e)
         {
             Button button = new Button();
-            button.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            //button.BackColor = System.Drawing.SystemColors.ControlLightLight;
             var width = _splitContainer1.Panel1.Width - _splitContainer1.Panel1.Margin.Horizontal;
             var height = (int)(_splitContainer1.Panel1.Width * Constants.WINDOWS_RATIO);
             button.Size = new Size(width, height);
             button.Left = (int)((_splitContainer1.Panel1.Width - button.Width) / Constants.TWO);
             button.Click += HandleClickPage;
             button.Paint += HandleButtonPaint;
-            Console.WriteLine("_model.SlideIndex" + _model.SlideIndex);
+            button.Tag = _model.SlideIndex;
             flowLayoutPanel1.Controls.Add(button);
             flowLayoutPanel1.Controls.SetChildIndex(button, _model.SlideIndex + 1);
-            _presentationModel.InsertPage(_model.SlideIndex);
+            _presentationModel.InsertPage(_model.SlideIndex + 1);
+            _dataGridViewRight.DataSource = _model.GetShapeList();
             UpdateUndoRedoButton();
         }
 
