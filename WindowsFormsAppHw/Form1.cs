@@ -273,19 +273,19 @@ namespace WindowsFormsAppHomework
         // Click add slide
         private void toolStripButtonAddNewSlide_Click(object sender, EventArgs e)
         {
-            Button button = new Button();
-            //button.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            var width = _splitContainer1.Panel1.Width - _splitContainer1.Panel1.Margin.Horizontal;
-            var height = (int)(_splitContainer1.Panel1.Width * Constants.WINDOWS_RATIO);
-            button.Size = new Size(width, height);
-            button.Left = (int)((_splitContainer1.Panel1.Width - button.Width) / Constants.TWO);
-            button.Click += HandleClickPage;
-            button.Paint += HandleButtonPaint;
-            button.Tag = _model.SlideIndex;
-            flowLayoutPanel1.Controls.Add(button);
-            flowLayoutPanel1.Controls.SetChildIndex(button, _model.SlideIndex + 1);
+            //Button button = new Button();
+            ////button.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            //var width = _splitContainer1.Panel1.Width - _splitContainer1.Panel1.Margin.Horizontal;
+            //var height = (int)(_splitContainer1.Panel1.Width * Constants.WINDOWS_RATIO);
+            //button.Size = new Size(width, height);
+            //button.Left = (int)((_splitContainer1.Panel1.Width - button.Width) / Constants.TWO);
+            //button.Click += HandleClickPage;
+            //button.Paint += HandleButtonPaint;
+            //button.Tag = _model.SlideIndex;
+            //flowLayoutPanel1.Controls.Add(button);
+            //flowLayoutPanel1.Controls.SetChildIndex(button, _model.SlideIndex + 1);
             _presentationModel.InsertPage(_model.SlideIndex + 1);
-            _dataGridViewRight.DataSource = _model.GetShapeList();
+            //_dataGridViewRight.DataSource = _model.GetShapeList();
             UpdateUndoRedoButton();
         }
 

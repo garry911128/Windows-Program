@@ -96,6 +96,7 @@ namespace WindowsFormsAppHomework
             {
                 SlideIndex = slideIndex - 1 ;
             }
+            _pageChanged(SlideIndex, Shapes.Action.Remove);
             Console.WriteLine("In Model , now slide Index:" +  SlideIndex);
             NotifyObserver();
         }
