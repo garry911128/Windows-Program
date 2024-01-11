@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.IO;
 
 namespace WindowsFormsAppHomework
 {
@@ -53,6 +54,12 @@ namespace WindowsFormsAppHomework
                 _shapeList.Remove(_selectedShape);
                 _selectedShape = null;
             }
+        }
+
+        // clear selected shape
+        public virtual void ClearSelectedShape()
+        {
+            _selectedShape = null;
         }
 
         // return shapestack size
@@ -145,5 +152,36 @@ namespace WindowsFormsAppHomework
             }
         }
 
+        // clear shape list
+        public virtual void Clear()
+        {
+            _shapeList.Clear();
+        }
+
+        // Convert to text file
+        public virtual string ConvertToFile(Size newCanvasSize)
+        {
+            var result = new StringBuilder();
+            for (int i = 0; i < _shapeList.Count; i++)
+            {
+                result.Append(Constants.LEFT_CURLY_BRACKET);
+                result.Append(_shapeList[i].GetConvert(newCanvasSize));
+                result.Append(Constants.RIGHT_CURLY_BRACKET);
+                if (i != _shapeList.Count - 1)
+                {
+                    result.Append(Constants.DOT + Constants.SPACE);
+                }
+            }
+            return result.ToString();
+        }
+
+        //copy
+        public virtual void LoadShapes(Shapes shapes)
+        {
+            foreach (Shape shape in shapes.GetShapeList)
+            {
+                _shapeList.Add(shape);
+            }
+        }
     }
 }

@@ -39,23 +39,25 @@ namespace WindowsFormsAppHomework
             this._deleteObject = new System.Windows.Forms.DataGridViewButtonColumn();
             this._shapeType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this._location = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this._smallSlide = new System.Windows.Forms.Button();
+            this.Slide = new System.Windows.Forms.Button();
             this._comboBoxShapeType = new System.Windows.Forms.ComboBox();
             this._backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this._buttonAdd = new System.Windows.Forms.Button();
             this._groupBoxRight = new System.Windows.Forms.GroupBox();
             this._toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this._toolStripButtonLine = new WindowsFormsAppHomework.BindingToolStripButton();
-            this._toolStripButtonRectangle = new WindowsFormsAppHomework.BindingToolStripButton();
-            this._toolStripButtonEllipse = new WindowsFormsAppHomework.BindingToolStripButton();
-            this._toolStripButtonCursor = new WindowsFormsAppHomework.BindingToolStripButton();
             this.toolStripButtonAddNewSlide = new System.Windows.Forms.ToolStripButton();
             this._toolStripButtonUndo = new System.Windows.Forms.ToolStripButton();
             this._toolStripButtonRedo = new System.Windows.Forms.ToolStripButton();
+            this._toolStripButtonSave = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonLoad = new System.Windows.Forms.ToolStripButton();
             this._splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this._splitContainer2 = new System.Windows.Forms.SplitContainer();
             this._panel1 = new WindowsFormsAppHomework.DoubleBufferedPanel();
+            this._toolStripButtonLine = new WindowsFormsAppHomework.BindingToolStripButton();
+            this._toolStripButtonRectangle = new WindowsFormsAppHomework.BindingToolStripButton();
+            this._toolStripButtonEllipse = new WindowsFormsAppHomework.BindingToolStripButton();
+            this._toolStripButtonCursor = new WindowsFormsAppHomework.BindingToolStripButton();
             this._menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this._dataGridViewRight)).BeginInit();
             this._groupBoxRight.SuspendLayout();
@@ -85,7 +87,7 @@ namespace WindowsFormsAppHomework
             this._menuStrip1.Location = new System.Drawing.Point(0, 0);
             this._menuStrip1.Name = "_menuStrip1";
             this._menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this._menuStrip1.Size = new System.Drawing.Size(1328, 27);
+            this._menuStrip1.Size = new System.Drawing.Size(1328, 30);
             this._menuStrip1.TabIndex = 0;
             this._menuStrip1.Text = "menuStrip1";
             // 
@@ -94,7 +96,7 @@ namespace WindowsFormsAppHomework
             this._toolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this._toolStripMenuItem2});
             this._toolStripMenuItem1.Name = "_toolStripMenuItem1";
-            this._toolStripMenuItem1.Size = new System.Drawing.Size(53, 23);
+            this._toolStripMenuItem1.Size = new System.Drawing.Size(53, 26);
             this._toolStripMenuItem1.Text = "說明";
             // 
             // _toolStripMenuItem2
@@ -114,7 +116,7 @@ namespace WindowsFormsAppHomework
             this._shapeType,
             this._location});
             this._dataGridViewRight.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this._dataGridViewRight.Location = new System.Drawing.Point(3, 64);
+            this._dataGridViewRight.Location = new System.Drawing.Point(3, 57);
             this._dataGridViewRight.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this._dataGridViewRight.Name = "_dataGridViewRight";
             this._dataGridViewRight.ReadOnly = true;
@@ -155,14 +157,14 @@ namespace WindowsFormsAppHomework
             this._location.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this._location.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
-            // _smallSlide
+            // Slide
             // 
-            this._smallSlide.Location = new System.Drawing.Point(3, 2);
-            this._smallSlide.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this._smallSlide.Name = "_smallSlide";
-            this._smallSlide.Size = new System.Drawing.Size(89, 73);
-            this._smallSlide.TabIndex = 4;
-            this._smallSlide.UseVisualStyleBackColor = true;
+            this.Slide.Location = new System.Drawing.Point(3, 2);
+            this.Slide.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Slide.Name = "Slide";
+            this.Slide.Size = new System.Drawing.Size(96, 54);
+            this.Slide.TabIndex = 4;
+            this.Slide.UseVisualStyleBackColor = true;
             // 
             // _comboBoxShapeType
             // 
@@ -199,7 +201,7 @@ namespace WindowsFormsAppHomework
             this._groupBoxRight.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this._groupBoxRight.Name = "_groupBoxRight";
             this._groupBoxRight.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this._groupBoxRight.Size = new System.Drawing.Size(227, 614);
+            this._groupBoxRight.Size = new System.Drawing.Size(227, 607);
             this._groupBoxRight.TabIndex = 8;
             this._groupBoxRight.TabStop = false;
             this._groupBoxRight.Text = "groupBox1";
@@ -214,49 +216,14 @@ namespace WindowsFormsAppHomework
             this._toolStripButtonCursor,
             this.toolStripButtonAddNewSlide,
             this._toolStripButtonUndo,
-            this._toolStripButtonRedo});
-            this._toolStrip1.Location = new System.Drawing.Point(0, 27);
+            this._toolStripButtonRedo,
+            this._toolStripButtonSave,
+            this.toolStripButtonLoad});
+            this._toolStrip1.Location = new System.Drawing.Point(0, 30);
             this._toolStrip1.Name = "_toolStrip1";
-            this._toolStrip1.Size = new System.Drawing.Size(1328, 27);
+            this._toolStrip1.Size = new System.Drawing.Size(1328, 31);
             this._toolStrip1.TabIndex = 9;
             this._toolStrip1.Text = "toolStrip1";
-            // 
-            // _toolStripButtonLine
-            // 
-            this._toolStripButtonLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._toolStripButtonLine.Image = global::WindowsFormsAppHomework.Properties.Resources.Line;
-            this._toolStripButtonLine.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._toolStripButtonLine.Name = "_toolStripButtonLine";
-            this._toolStripButtonLine.Size = new System.Drawing.Size(29, 24);
-            this._toolStripButtonLine.Text = "線";
-            // 
-            // _toolStripButtonRectangle
-            // 
-            this._toolStripButtonRectangle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._toolStripButtonRectangle.Image = global::WindowsFormsAppHomework.Properties.Resources.Rectangle;
-            this._toolStripButtonRectangle.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._toolStripButtonRectangle.Name = "_toolStripButtonRectangle";
-            this._toolStripButtonRectangle.Size = new System.Drawing.Size(29, 24);
-            this._toolStripButtonRectangle.Text = "矩形";
-            // 
-            // _toolStripButtonEllipse
-            // 
-            this._toolStripButtonEllipse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._toolStripButtonEllipse.Image = global::WindowsFormsAppHomework.Properties.Resources.Ellipse;
-            this._toolStripButtonEllipse.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._toolStripButtonEllipse.Name = "_toolStripButtonEllipse";
-            this._toolStripButtonEllipse.Size = new System.Drawing.Size(29, 24);
-            this._toolStripButtonEllipse.Text = "橢圓形";
-            // 
-            // _toolStripButtonCursor
-            // 
-            this._toolStripButtonCursor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this._toolStripButtonCursor.Image = global::WindowsFormsAppHomework.Properties.Resources.Cursor;
-            this._toolStripButtonCursor.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this._toolStripButtonCursor.Name = "_toolStripButtonCursor";
-            this._toolStripButtonCursor.Size = new System.Drawing.Size(29, 24);
-            this._toolStripButtonCursor.Text = "Cursor";
-            this._toolStripButtonCursor.Click += new System.EventHandler(this.ToolStripButtonCursorClick);
             // 
             // toolStripButtonAddNewSlide
             // 
@@ -264,7 +231,7 @@ namespace WindowsFormsAppHomework
             this.toolStripButtonAddNewSlide.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAddNewSlide.Image")));
             this.toolStripButtonAddNewSlide.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonAddNewSlide.Name = "toolStripButtonAddNewSlide";
-            this.toolStripButtonAddNewSlide.Size = new System.Drawing.Size(29, 24);
+            this.toolStripButtonAddNewSlide.Size = new System.Drawing.Size(29, 28);
             this.toolStripButtonAddNewSlide.Text = "toolStripButtonAddNewSlide";
             this.toolStripButtonAddNewSlide.Click += new System.EventHandler(this.toolStripButtonAddNewSlide_Click);
             // 
@@ -274,7 +241,7 @@ namespace WindowsFormsAppHomework
             this._toolStripButtonUndo.Image = ((System.Drawing.Image)(resources.GetObject("_toolStripButtonUndo.Image")));
             this._toolStripButtonUndo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._toolStripButtonUndo.Name = "_toolStripButtonUndo";
-            this._toolStripButtonUndo.Size = new System.Drawing.Size(29, 24);
+            this._toolStripButtonUndo.Size = new System.Drawing.Size(29, 28);
             this._toolStripButtonUndo.Text = "toolStripButtonUndo";
             this._toolStripButtonUndo.Click += new System.EventHandler(this.ToolStripButtonUndoClick);
             // 
@@ -284,15 +251,35 @@ namespace WindowsFormsAppHomework
             this._toolStripButtonRedo.Image = ((System.Drawing.Image)(resources.GetObject("_toolStripButtonRedo.Image")));
             this._toolStripButtonRedo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this._toolStripButtonRedo.Name = "_toolStripButtonRedo";
-            this._toolStripButtonRedo.Size = new System.Drawing.Size(29, 24);
+            this._toolStripButtonRedo.Size = new System.Drawing.Size(29, 28);
             this._toolStripButtonRedo.Text = "toolStripButtonRedo";
             this._toolStripButtonRedo.Click += new System.EventHandler(this.ToolStripButtonRedoClick);
+            // 
+            // _toolStripButtonSave
+            // 
+            this._toolStripButtonSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._toolStripButtonSave.Image = ((System.Drawing.Image)(resources.GetObject("_toolStripButtonSave.Image")));
+            this._toolStripButtonSave.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolStripButtonSave.Name = "_toolStripButtonSave";
+            this._toolStripButtonSave.Size = new System.Drawing.Size(29, 28);
+            this._toolStripButtonSave.Text = "toolStripButtonSave";
+            this._toolStripButtonSave.Click += new System.EventHandler(this.ClickToolStripSaveButton);
+            // 
+            // toolStripButtonLoad
+            // 
+            this.toolStripButtonLoad.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonLoad.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonLoad.Image")));
+            this.toolStripButtonLoad.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonLoad.Name = "toolStripButtonLoad";
+            this.toolStripButtonLoad.Size = new System.Drawing.Size(29, 28);
+            this.toolStripButtonLoad.Text = "toolStripButtonLoad";
+            this.toolStripButtonLoad.Click += new System.EventHandler(this.ClickToolStripLoadButton);
             // 
             // _splitContainer1
             // 
             this._splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this._splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-            this._splitContainer1.Location = new System.Drawing.Point(0, 54);
+            this._splitContainer1.Location = new System.Drawing.Point(0, 61);
             this._splitContainer1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this._splitContainer1.Name = "_splitContainer1";
             // 
@@ -304,7 +291,7 @@ namespace WindowsFormsAppHomework
             // _splitContainer1.Panel2
             // 
             this._splitContainer1.Panel2.Controls.Add(this._splitContainer2);
-            this._splitContainer1.Size = new System.Drawing.Size(1328, 614);
+            this._splitContainer1.Size = new System.Drawing.Size(1328, 607);
             this._splitContainer1.SplitterDistance = 113;
             this._splitContainer1.TabIndex = 11;
             this._splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.AdjustLeftSideSplitContainer);
@@ -312,11 +299,11 @@ namespace WindowsFormsAppHomework
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.Controls.Add(this._smallSlide);
+            this.flowLayoutPanel1.Controls.Add(this.Slide);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 22);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(95, 77);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(102, 573);
             this.flowLayoutPanel1.TabIndex = 12;
             // 
             // _splitContainer2
@@ -336,7 +323,7 @@ namespace WindowsFormsAppHomework
             // 
             this._splitContainer2.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this._splitContainer2.Panel2.Controls.Add(this._groupBoxRight);
-            this._splitContainer2.Size = new System.Drawing.Size(1211, 614);
+            this._splitContainer2.Size = new System.Drawing.Size(1211, 607);
             this._splitContainer2.SplitterDistance = 980;
             this._splitContainer2.TabIndex = 0;
             this._splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.AdjustRightSideSplitContainer);
@@ -348,6 +335,43 @@ namespace WindowsFormsAppHomework
             this._panel1.Name = "_panel1";
             this._panel1.Size = new System.Drawing.Size(800, 450);
             this._panel1.TabIndex = 10;
+            // 
+            // _toolStripButtonLine
+            // 
+            this._toolStripButtonLine.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._toolStripButtonLine.Image = global::WindowsFormsAppHomework.Properties.Resources.Line;
+            this._toolStripButtonLine.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolStripButtonLine.Name = "_toolStripButtonLine";
+            this._toolStripButtonLine.Size = new System.Drawing.Size(29, 28);
+            this._toolStripButtonLine.Text = "線";
+            // 
+            // _toolStripButtonRectangle
+            // 
+            this._toolStripButtonRectangle.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._toolStripButtonRectangle.Image = global::WindowsFormsAppHomework.Properties.Resources.Rectangle;
+            this._toolStripButtonRectangle.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolStripButtonRectangle.Name = "_toolStripButtonRectangle";
+            this._toolStripButtonRectangle.Size = new System.Drawing.Size(29, 28);
+            this._toolStripButtonRectangle.Text = "矩形";
+            // 
+            // _toolStripButtonEllipse
+            // 
+            this._toolStripButtonEllipse.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._toolStripButtonEllipse.Image = global::WindowsFormsAppHomework.Properties.Resources.Ellipse;
+            this._toolStripButtonEllipse.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolStripButtonEllipse.Name = "_toolStripButtonEllipse";
+            this._toolStripButtonEllipse.Size = new System.Drawing.Size(29, 28);
+            this._toolStripButtonEllipse.Text = "橢圓形";
+            // 
+            // _toolStripButtonCursor
+            // 
+            this._toolStripButtonCursor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this._toolStripButtonCursor.Image = global::WindowsFormsAppHomework.Properties.Resources.Cursor;
+            this._toolStripButtonCursor.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this._toolStripButtonCursor.Name = "_toolStripButtonCursor";
+            this._toolStripButtonCursor.Size = new System.Drawing.Size(29, 28);
+            this._toolStripButtonCursor.Text = "Cursor";
+            this._toolStripButtonCursor.Click += new System.EventHandler(this.ToolStripButtonCursorClick);
             // 
             // Form1
             // 
@@ -387,7 +411,7 @@ namespace WindowsFormsAppHomework
         private System.Windows.Forms.MenuStrip _menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem _toolStripMenuItem1;
         private System.Windows.Forms.DataGridView _dataGridViewRight;
-        private System.Windows.Forms.Button _smallSlide;
+        private System.Windows.Forms.Button Slide;
         private System.Windows.Forms.ComboBox _comboBoxShapeType;
         private System.ComponentModel.BackgroundWorker _backgroundWorker1;
         private System.Windows.Forms.Button _buttonAdd;
@@ -408,6 +432,8 @@ namespace WindowsFormsAppHomework
         private System.Windows.Forms.ToolStripButton _toolStripButtonRedo;
         private System.Windows.Forms.ToolStripButton toolStripButtonAddNewSlide;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.ToolStripButton _toolStripButtonSave;
+        private System.Windows.Forms.ToolStripButton toolStripButtonLoad;
     }
 }
 

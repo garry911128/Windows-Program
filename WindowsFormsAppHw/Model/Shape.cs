@@ -106,6 +106,12 @@ namespace WindowsFormsAppHomework
             throw new NotImplementedException(NOT_IMPLEMENT);
         }
 
+        // get encode shape info
+        public virtual string GetConvert(Size nowCanvasSize)
+        {
+            return _shapeName + Constants.DOT + Constants.LEFT_CURLY_BRACKET + _position[TOP_LEFT_POINT_INDEX].X / nowCanvasSize.Width + Constants.DOT + _position[TOP_LEFT_POINT_INDEX].Y / nowCanvasSize.Height + Constants.DOT + _position[BOTTOM_RIGHT_POINT_INDEX].X / nowCanvasSize.Width + Constants.DOT + _position[BOTTOM_RIGHT_POINT_INDEX].Y / nowCanvasSize.Height + Constants.RIGHT_CURLY_BRACKET;
+        }
+
         // Getter position
         public virtual Point GetPoint(int index)
         {

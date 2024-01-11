@@ -9,6 +9,9 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using PointerInputDevice = OpenQA.Selenium.Appium.Interactions.PointerInputDevice;
+using OpenQA.Selenium.Appium;
+using OpenQA.Selenium;
+using System.Linq;
 
 namespace WindowsFormsAppHomework.Tests
 {
@@ -16,7 +19,7 @@ namespace WindowsFormsAppHomework.Tests
     public class UITest
     {
         public string targetAppPath;
-        public const string MENU_FORM = "Form1";
+        public const string MENU_FORM = "MenuForm";
         public Robot _robot;
         private WindowsElement _canvas;
 
@@ -35,7 +38,7 @@ namespace WindowsFormsAppHomework.Tests
         [TestCleanup()]
         public void Teardown()
         {
-           _robot.ClickButton("關閉");
+           //_robot.ClickButton("關閉");
         }
 
         // Move pointer to point
@@ -76,6 +79,23 @@ namespace WindowsFormsAppHomework.Tests
                 .AddAction(MovePointerTo(pointer, resizeEndPoint))
                 .AddAction(pointer.CreatePointerUp(MouseButton.Left));
             _robot.PerformAction(actionBuilder.ToActionSequenceList());
+        }
+
+        // get slides
+        public int GetSlideCount()
+        {
+            _robot.SwitchTo("flowLayoutPanel1");
+            WindowsElement flowLayoutPanel1 = _robot.FindElementByName("flowLayoutPanel1");
+            if (flowLayoutPanel1 != null)
+            {
+                IReadOnlyCollection<AppiumWebElement> slides = flowLayoutPanel1.FindElementsByAccessibilityId("Slide");
+                if (slides != null)
+                {
+                    Console.WriteLine(slides.Count);
+                    return slides.Count;
+                }
+            }
+            return 0;
         }
 
         [TestMethod]
@@ -200,5 +220,21 @@ namespace WindowsFormsAppHomework.Tests
             _robot.ResizeWindow(width, height);
             Assert.IsTrue(Math.Abs(_canvas.Size.Width / _canvas.Size.Height - 16 / 9) < 0.01);
         }
+
+        // use toolStripButtonAddNewSlide to add slide
+        [TestMethod]
+        public void AssertAddSlideAndDeleteSlide()
+        {
+            _robot.ClickButton("toolStripButtonAddNewSlide");
+            Assert.AreEqual(2, GetSlideCount());
+            _robot.SwitchTo("flowLayoutPanel1");
+            WindowsElement flowLayoutPanel1 = _robot.FindElementByName("flowLayoutPanel1");
+            IReadOnlyCollection<AppiumWebElement> slides = flowLayoutPanel1.FindElementsByAccessibilityId("Slide");
+            slides.ElementAt(1).Click();
+            Actions actions = new Actions(_robot.GetDriver());
+            actions.SendKeys(OpenQA.Selenium.Keys.Delete).Perform();
+            Assert.AreEqual(1, GetSlideCount());
+        }
+
     }
 }

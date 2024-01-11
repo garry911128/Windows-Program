@@ -11,6 +11,10 @@ namespace WindowsFormsAppHomework
         public const string LEFT_SMALL_BRACKET = "(";
         public const string RIGHT_SMALL_BRACKET = ")";
         public const string DOT = ",";
+        public const string SPACE = " ";
+        public const string LEFT_CURLY_BRACKET = "{";
+        public const string RIGHT_CURLY_BRACKET = "}";
+        public const string SPLASH = "\\";
         public const int TWO = 2;
         public const int EIGHT = 8;
         public const string DELETE = "刪除";
@@ -32,6 +36,8 @@ namespace WindowsFormsAppHomework
         public const string IS_UNDO_ENABLED = "IsUndoEnabled";
         public const string CAN_NOT_UNDO = "Cannot Undo exception\n";
         public const string CAN_NOT_REDO = "Cannot Redo exception\n";
+        public const string TEXT_PLAIN = "text/plain";
+        public const char EOL = '\n';
         public enum ToolStripButtonType
         {
             LINE,

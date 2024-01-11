@@ -66,5 +66,14 @@ namespace WindowsFormsAppHomework
         {
             return _currentSlide;
         }
+
+        // clear 
+        public virtual void Clear()
+        {
+            _undo.Clear();
+            _redo.Clear();
+            _currentSlide = 0;
+        }
+
     }
 }

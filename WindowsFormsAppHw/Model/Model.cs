@@ -9,19 +9,24 @@ using System.Drawing;
 using WindowsFormsAppHomework.PresentationModel;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.IO;
+using System.Threading;
 
 namespace WindowsFormsAppHomework
 {
-    public class Model
+    public partial class Model
     {
         public event ModelChangedEventHandler _modelChanged;
         public delegate void ModelChangedEventHandler();
         public event Action<int, Shapes.Action> _pageChanged;
         private ShapeFactory _shapeFactory;
-        private Shapes _shapes;
         private Pages _pages;
         private Shape _hint;
         private CommandManager _commandManager;
+        GoogleDriveService _service;
+        private string _fileId = "";
+        private string _solutionPath;
+        private string _filePath;
         Size _canvasSize;
         IState _state;
         // SetShowHint
@@ -54,13 +59,18 @@ namespace WindowsFormsAppHomework
 
         public Model()
         {
-            _shapes = new Shapes();
+            Shapes shapes = new Shapes();
             _pages = new Pages();
-            _pages.Add(_shapes);
+            _pages.Add(shapes);
             SlideIndex = 0;
             _shapeFactory = new ShapeFactory(); //Point topLeftPoint,double width,double height
             _state = new PointerState(this);
             _commandManager = new CommandManager();
+            const string APPLICATION_NAME = "DrawAnyWhere";
+            const string CLIENT_SECRET_FILE_NAME = "clientSecret.json";
+            _service = new GoogleDriveService(APPLICATION_NAME, CLIENT_SECRET_FILE_NAME);
+            _solutionPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\..\\"));
+            _filePath = Path.Combine(_solutionPath, "WindowsFormsAppHw", "bin", "Debug", "Garry's.txt");
         }
 
         // Set State
@@ -89,13 +99,13 @@ namespace WindowsFormsAppHomework
         // delete a shapes
         public virtual void DeletePage(int slideIndex, Shapes shapes)
         {
-            _pages.Remove(shapes);
             Console.WriteLine("In Model , now slide Index:" + SlideIndex);
             Console.WriteLine("In Model , now pages Count:" + _pages.Count);
-            if (slideIndex == _pages.Count)
+            if (slideIndex == _pages.Count - 1)
             {
                 SlideIndex = slideIndex - 1 ;
             }
+            _pages.Remove(shapes);
             _pageChanged(SlideIndex, Shapes.Action.Remove);
             Console.WriteLine("In Model , now slide Index:" +  SlideIndex);
             NotifyObserver();
@@ -152,7 +162,7 @@ namespace WindowsFormsAppHomework
             {
                 _state = new PointerState(this);
                 Shape newShape = _shapeFactory.CreateShape(shapeType, topLeftPoint, bottomRightPoint.X - topLeftPoint.X, bottomRightPoint.Y - topLeftPoint.Y);
-                AddCommand addCommand = new AddCommand(this, newShape, SlideIndex, _shapes.GetShapeListSize());
+                AddCommand addCommand = new AddCommand(this, newShape, SlideIndex, _pages[SlideIndex].GetShapeListSize());
                 _commandManager.Execute(addCommand, _canvasSize);
                 NotifyObserver();
             }
@@ -215,6 +225,7 @@ namespace WindowsFormsAppHomework
             {
                 int index = _pages[SlideIndex].GetShapeList.IndexOf(_pages[SlideIndex].GetSelectedShape());
                 ExecuteDeleteCommand(index);
+                _pages[SlideIndex].ClearSelectedShape();
                 NotifyObserver();
             }
             else if(keyCode == Keys.Delete && _pages[SlideIndex].GetSelectedShape() == null)
@@ -320,6 +331,7 @@ namespace WindowsFormsAppHomework
             _canvasSize = new Size(newSize.Width, newSize.Height);
             NotifyObserver();
         }
+
 
     }
 }

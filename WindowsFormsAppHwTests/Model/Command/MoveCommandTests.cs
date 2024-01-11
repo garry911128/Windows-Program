@@ -19,7 +19,7 @@ namespace WindowsFormsAppHomework.Tests
             // Arrange
             var modelMock = new Mock<Model>();
             var shapeMock = new Mock<Shape>();
-            var moveCommand = new MoveCommand(modelMock.Object, shapeMock.Object);
+            var moveCommand = new MoveCommand(modelMock.Object, shapeMock.Object, 0);
             moveCommand.DoExecute(It.IsAny<Size>());
             shapeMock.Verify(s => s.Move(It.IsAny<double>(), It.IsAny<double>()), Times.Once);
         }
@@ -30,7 +30,7 @@ namespace WindowsFormsAppHomework.Tests
             // Arrange
             var modelMock = new Mock<Model>();
             var shapeMock = new Mock<Shape>();
-            var moveCommand = new MoveCommand(modelMock.Object, shapeMock.Object);
+            var moveCommand = new MoveCommand(modelMock.Object, shapeMock.Object, 0);
 
             // Act
             moveCommand.UndoExecute(It.IsAny<Size>());
@@ -45,7 +45,7 @@ namespace WindowsFormsAppHomework.Tests
             // Arrange
             var modelMock = new Mock<Model>();
             var shapeMock = new Mock<Shape>();
-            var moveCommand = new MoveCommand(modelMock.Object, shapeMock.Object);
+            var moveCommand = new MoveCommand(modelMock.Object, shapeMock.Object, 0);
             PrivateObject privateMoveCommand = new PrivateObject(moveCommand);
             moveCommand.SetDelta(new Point(10, 20), new Point(30, 40));
             var deltaField = (Point)privateMoveCommand.GetField("_delta");
@@ -59,7 +59,7 @@ namespace WindowsFormsAppHomework.Tests
             // Arrange
             var modelMock = new Mock<Model>();
             var shapeMock = new Mock<Shape>();
-            var moveCommand = new MoveCommand(modelMock.Object, shapeMock.Object);
+            var moveCommand = new MoveCommand(modelMock.Object, shapeMock.Object, 0);
             var originalCanvasSize = new Size(100, 100);
             var newCanvasSize = new Size(200, 200);
 

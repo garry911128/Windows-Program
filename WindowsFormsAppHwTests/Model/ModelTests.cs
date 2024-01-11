@@ -117,7 +117,9 @@ namespace WindowsFormsAppHomework.Tests
             var shapeList = new BindingList<Shape> { selectedShapeMock.Object };
             shapesMock.Setup(s => s.GetShapeList).Returns(shapeList);
             shapesMock.Setup(s => s.GetSelectedShape()).Returns(selectedShapeMock.Object);
-            _privateModel.SetField("_shapes", shapesMock.Object);
+            var pagesMock = new Mock<Pages>();
+            pagesMock.Object.Add(shapesMock.Object);
+            _privateModel.SetField("_pages", pagesMock.Object);
             model.HandleKeyDown(keyCode);
             commandManagerMock.Verify(cm => cm.Execute(It.IsAny<ICommand>(), It.IsAny<Size>()), Times.Once);
             Assert.AreEqual(0, shapesMock.Object.GetShapeList.IndexOf(selectedShapeMock.Object));
@@ -132,7 +134,9 @@ namespace WindowsFormsAppHomework.Tests
             Setup();
             var shapesMock = new Mock<Shapes>();
             var selectedShape = new Mock<Shape>();
-            _privateModel.SetField("_shapes", shapesMock.Object);
+            var pagesMock = new Mock<Pages>();
+            pagesMock.Object.Add(shapesMock.Object);
+            _privateModel.SetField("_pages", pagesMock.Object);
             shapesMock.Setup(s => s.GetSelectedShape()).Returns(selectedShape.Object);
             Assert.AreEqual(selectedShape.Object, model.GetSelectedShape());
         }
@@ -154,7 +158,9 @@ namespace WindowsFormsAppHomework.Tests
             // Arrange
             var mousePoint = new Point(10, 20);
             var shapesMock = new Mock<Shapes>();
-            _privateModel.SetField("_shapes", shapesMock.Object);
+            var pagesMock = new Mock<Pages>();
+            pagesMock.Object.Add(shapesMock.Object);
+            _privateModel.SetField("_pages", pagesMock.Object);
             shapesMock.Setup(s => s.IsPointInSelectedShapeHandle(mousePoint)).Returns(true);
             var result = model.IsPointInSelectedShapeHandle(mousePoint);
             Assert.IsTrue(result); // Depending on your actual logic
@@ -216,7 +222,9 @@ namespace WindowsFormsAppHomework.Tests
         {
             Setup();
             var shapesMock = new Mock<Shapes>();
-            _privateModel.SetField("_shapes", shapesMock.Object);
+            var pagesMock = new Mock<Pages>();
+            pagesMock.Object.Add(shapesMock.Object);
+            _privateModel.SetField("_pages", pagesMock.Object);
             model.MoveShape(10, 10);
             shapesMock.Verify(s => s.MovedSelectedShapeByMouse(It.IsAny<double>(), It.IsAny<double>()), Times.Once);
         }
@@ -230,7 +238,9 @@ namespace WindowsFormsAppHomework.Tests
             var shape1Mock = new Mock<Shape>();
             var shape2Mock = new Mock<Shape>();
             var hintMock = new Mock<Shape>();
-            _privateModel.SetField("_shapes", shapesMock.Object);
+            var pagesMock = new Mock<Pages>();
+            pagesMock.Object.Add(shapesMock.Object);
+            _privateModel.SetField("_pages", pagesMock.Object);
             _privateModel.SetField("_hint", hintMock.Object);
 
             shapesMock.Setup(s => s.GetShapeList).Returns(new BindingList<Shape> { shape1Mock.Object, shape2Mock.Object });
@@ -287,7 +297,9 @@ namespace WindowsFormsAppHomework.Tests
             var moveCommandMock = new Mock<MoveCommand>(model, selectedShapeMock.Object);
             _privateModel.SetField("_commandManager", commandManagerMock.Object);
             shapesMock.Setup(spm => spm.GetSelectedShape()).Returns(selectedShapeMock.Object);
-            _privateModel.SetField("_shapes", shapesMock.Object);
+            var pagesMock = new Mock<Pages>();
+            pagesMock.Object.Add(shapesMock.Object);
+            _privateModel.SetField("_pages", pagesMock.Object);
             model.ExecuteMoveCommand(new Point(0, 0), new Point(50, 50));
             commandManagerMock.Verify(cm => cm.Execute(It.IsAny<MoveCommand>(), It.IsAny<Size>()), Times.Once);
         }
@@ -297,7 +309,9 @@ namespace WindowsFormsAppHomework.Tests
         {
             Setup();
             var shapesMock = new Mock<Shapes>();
-            _privateModel.SetField("_shapes", shapesMock.Object);
+            var pagesMock = new Mock<Pages>();
+            pagesMock.Object.Add(shapesMock.Object);
+            _privateModel.SetField("_pages", pagesMock.Object);
             var newSize = new Size(300, 400);
             _privateModel.SetField("_canvasSize", newSize);
             //shapesMock.Setup(sps => sps.SetPanelSize(It.IsAny<Size>(), newSize));

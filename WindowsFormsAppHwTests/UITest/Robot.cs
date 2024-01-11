@@ -4,12 +4,11 @@ using OpenQA.Selenium.Appium.Windows;
 using System;
 using System.Threading;
 using System.Windows.Automation;
-using System.Windows;
 using System.Collections.Generic;
 using OpenQA.Selenium;
-using System.Windows.Input;
 using System.Windows.Forms;
 using OpenQA.Selenium.Interactions;
+using System.IO;
 
 namespace WindowsFormsAppHomework.Tests
 {
@@ -34,6 +33,8 @@ namespace WindowsFormsAppHomework.Tests
             var options = new AppiumOptions();
             options.AddAdditionalCapability("app", targetAppPath);
             options.AddAdditionalCapability("deviceName", "WindowsPC");
+            string path = Path.GetDirectoryName(targetAppPath);
+            options.AddAdditionalCapability("appWorkingDir", path);
             _driver = new WindowsDriver<WindowsElement>(new Uri(WIN_APP_DRIVER_URI), options);
             _driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(1.5);
             _windowHandles = new Dictionary<string, string>
@@ -101,6 +102,12 @@ namespace WindowsFormsAppHomework.Tests
                     }
                 }
             }
+        }
+
+        // get driver
+        public WindowsDriver<WindowsElement> GetDriver()
+        {
+            return _driver;
         }
 
         // test

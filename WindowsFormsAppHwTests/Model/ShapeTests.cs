@@ -2,7 +2,7 @@
 using System;
 using System.Drawing;
 using WindowsFormsAppHomework;
-
+using Moq;
 namespace WindowsFormsAppHomework.Tests
 {
     [TestClass()]
@@ -37,6 +37,14 @@ namespace WindowsFormsAppHomework.Tests
             shape.Move(5, 5);
             Assert.AreEqual(15, shape.GetPoint(0).X);
             Assert.AreEqual(25, shape.GetPoint(0).Y);
+        }
+
+        [TestMethod]
+        public void GetConvert_ShouldReturnExpectedString()
+        {
+            Shape shape = new Rectangle(0, 0, 100, 100);
+            string result = shape.GetConvert(new Size(100, 100));
+            Assert.AreEqual("矩形,{0,0,1,1}", result); // Adjust the expected result based on your actual logic
         }
 
         // test Draw

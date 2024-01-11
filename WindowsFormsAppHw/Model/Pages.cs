@@ -17,6 +17,7 @@ namespace WindowsFormsAppHomework
         {
             _pages = new List<Shapes>();
         }
+
         // insert page
         public void Insert(int index, Shapes shapes)
         {
@@ -57,17 +58,29 @@ namespace WindowsFormsAppHomework
             _pages.Add(shapes);
         }
 
-        // encode
-        //public string Encode()
-        //{
-        //    string encodedPages = "";
-        //    foreach (Shapes shapes in _pages)
-        //    {
-        //        encodedPages += shapes.Encode();
-        //        encodedPages += "\n";
-        //    }
-        //    return encodedPages;
-        //}
-        
+        //encode
+        public string Encode(Size nowSize)
+        {
+            string encodedPages = "";
+            foreach (Shapes shapes in _pages)
+            {
+                encodedPages += shapes.ConvertToFile(nowSize);
+                encodedPages += "\n";
+            }
+            return encodedPages;
+        }
+
+        // clear slide to only one page
+        public virtual int Clear()
+        {
+            int count = _pages.Count - 1;
+            for (var i = count; i > 0; i--)
+            {
+                _pages.RemoveAt(i);
+            }
+            _pages[0].Clear();
+            return count;
+        }
+
     }
 }

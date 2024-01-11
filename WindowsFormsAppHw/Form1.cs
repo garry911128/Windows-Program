@@ -17,6 +17,8 @@ namespace WindowsFormsAppHomework
         private PresentationModel.PresentationModel _presentationModel;
         private BindingSource _bindingSource = new BindingSource();
         private DialogForm _dialog;
+        private SaveDialogForm _saveDialog;
+        private LoadDialogForm _loadDialog;
         private Bitmap _brief;
 
         public Form1(Model model)
@@ -36,10 +38,12 @@ namespace WindowsFormsAppHomework
             _toolStripButtonRectangle.Click += ButtonModeClick;
             _toolStripButtonRedo.Enabled = false;
             _toolStripButtonUndo.Enabled = false;
-            _smallSlide.Click += HandleClickPage;
+            Slide.Click += HandleClickPage;
             this.KeyPreview = true;
             this.KeyDown += HandleKeyDown;
             _dialog = new DialogForm();
+            _saveDialog = new SaveDialogForm(_model);
+            _loadDialog = new LoadDialogForm(_model);
         }
 
         // Set Cursor
@@ -87,7 +91,7 @@ namespace WindowsFormsAppHomework
             _panel1.MouseUp += HandleCanvasReleased;
             _panel1.MouseMove += HandleCanvasMoved;
             _panel1.Paint += HandleCanvasPaint;
-            _smallSlide.Paint += HandleButtonPaint;
+            Slide.Paint += HandleButtonPaint;
             SizeChanged += CanvasSizeChanged;
             _brief = new Bitmap(this._panel1.Width, this._panel1.Height);
             CanvasSizeChanged(this, null); // lazy resize
@@ -244,8 +248,8 @@ namespace WindowsFormsAppHomework
             //_smallSlide.Width = (int)panel1Width - _splitContainer1.Panel1.Margin.Horizontal;
             //_smallSlide.Height = (int)(_smallSlide.Width / Constants.WINDOWS_RATIO);
             //_smallSlide.Left = (int)((panel1Width - _smallSlide.Width) / Constants.TWO);
-            flowLayoutPanel1.Width = _splitContainer1.Panel1.Width - Constants.EIGHT;
-            flowLayoutPanel1.Height = _splitContainer1.Panel1.Height;
+            //flowLayoutPanel1.Width = _splitContainer1.Panel1.Width - Constants.EIGHT;
+            //flowLayoutPanel1.Height = _splitContainer1.Panel1.Height;
             for (var i = 0; i < flowLayoutPanel1.Controls.Count; i++)
             {
                 flowLayoutPanel1.Controls[i].Width = (int)panel1Width - _splitContainer1.Panel1.Margin.Horizontal;
@@ -323,8 +327,8 @@ namespace WindowsFormsAppHomework
             Button button = GetNewSlideButton();
             flowLayoutPanel1.Controls.Add(button);
             flowLayoutPanel1.Controls.SetChildIndex(button, index);
-            button.Focus();
             _presentationModel.ProcessSlideChange(index);
+            button.Focus();
             _dataGridViewRight.DataSource = _model.GetShapeList();
         }
 
@@ -337,6 +341,8 @@ namespace WindowsFormsAppHomework
             var height = (int)(_splitContainer1.Panel1.Width * Constants.WINDOWS_RATIO);
             button.Width = width;
             button.Height = height;
+            button.Left = (int)((panel1Width - button.Width) / Constants.TWO);
+            button.Name = "Slide";
             //button.BackColor = Color.White;
             button.BackgroundImageLayout = ImageLayout.Stretch;
             button.Click += HandleClickPage;
@@ -344,15 +350,17 @@ namespace WindowsFormsAppHomework
         }
 
         // process move page
-        private void HandleRemovePage(int SlideIndex)
+        private void HandleRemovePage(int slideIndex)
         {
-            flowLayoutPanel1.Controls.RemoveAt(SlideIndex);
-            _model.SlideIndex = SlideIndex;
-            if (SlideIndex == -1)
+            if (slideIndex == -1)
             {
                 return;
             }
-            flowLayoutPanel1.Controls[SlideIndex].Focus();
+            Console.WriteLine("Remove Slide Index in Form" + slideIndex);
+            Console.WriteLine("Now Slide Index in Form" + _model.SlideIndex);
+            flowLayoutPanel1.Controls.RemoveAt(slideIndex);
+            _model.SlideIndex = slideIndex;
+            flowLayoutPanel1.Controls[slideIndex].Focus();
             _dataGridViewRight.DataSource = _model.GetShapeList();
         }
 
@@ -362,7 +370,16 @@ namespace WindowsFormsAppHomework
             _model.SlideIndex = SlideIndex;
             _dataGridViewRight.DataSource = _model.GetShapeList();
             flowLayoutPanel1.Controls[SlideIndex].Focus();
+        }
 
+        private void ClickToolStripSaveButton(object sender, EventArgs e)
+        {
+            _saveDialog.ShowDialog();
+        }
+
+        private void ClickToolStripLoadButton(object sender, EventArgs e)
+        {
+            _loadDialog.ShowDialog();
         }
     }
 }
