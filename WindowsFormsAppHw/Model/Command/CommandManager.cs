@@ -28,7 +28,6 @@ namespace WindowsFormsAppHomework
             if (_undo.Count <= 0)
                 throw new Exception(Constants.CAN_NOT_UNDO);
             ICommand command = _undo.Pop();
-            Console.WriteLine("undo type" + command.GetType());
             _redo.Push(command);
             _currentSlide = command.GetSlideIndex();
             command.UndoExecute(nowSize);

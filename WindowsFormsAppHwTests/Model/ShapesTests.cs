@@ -213,5 +213,76 @@ namespace WindowsFormsAppHomework.Tests
             shape3Mock.Verify(s => s.SetPanelSize(newCanvasSize, oldSize), Times.Once);
         }
 
+        [TestMethod]
+        public void ClearSelectedShape_ShouldSetSelectedShapeToNull()
+        {
+            // Arrange
+            var shapes = new Shapes();
+
+            // Set a mock selected shape to simulate an existing selected shape
+            var mockSelectedShape = new Mock<Shape>();
+            shapes.GetType().GetField("_selectedShape", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(shapes, mockSelectedShape.Object);
+
+            // Act
+            shapes.ClearSelectedShape();
+
+            // Assert
+            var selectedShape = shapes.GetType().GetField("_selectedShape", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(shapes);
+            Assert.IsNull(selectedShape, "SelectedShape should be null after ClearSelectedShape");
+        }
+
+        [TestMethod]
+        public void Clear_ShouldClearShapeList()
+        {
+            // Arrange
+            var shapes = new Shapes();
+
+            // Add some mock shapes to the shape list
+            var mockShape1 = new Mock<Shape>();
+            var mockShape2 = new Mock<Shape>();
+            shapes.GetType().GetField("_shapeList", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(shapes, new System.ComponentModel.BindingList<Shape> { mockShape1.Object, mockShape2.Object });
+
+            // Act
+            shapes.Clear();
+
+            // Assert
+            var shapeList = (System.ComponentModel.BindingList<Shape>)shapes.GetType().GetField("_shapeList", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(shapes);
+            Assert.AreEqual(0, shapeList.Count, "ShapeList should be empty after Clear");
+        }
+
+        [TestMethod]
+        public void ConvertToFile_ShouldReturnFormattedString()
+        {
+            var shapes = new Shapes();
+            var mockShape1 = new Mock<Shape>();
+            var mockShape2 = new Mock<Shape>();
+            shapes.GetType().GetField("_shapeList", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(shapes, new System.ComponentModel.BindingList<Shape> { mockShape1.Object, mockShape2.Object });
+            mockShape1.Setup(s => s.GetConvert(It.IsAny<Size>())).Returns("MockShape1Convert");
+            mockShape2.Setup(s => s.GetConvert(It.IsAny<Size>())).Returns("MockShape2Convert");
+            Size newCanvasSize = new Size(100, 200);
+            var result = shapes.ConvertToFile(newCanvasSize);
+            var expected = "{MockShape1Convert}, {MockShape2Convert}";
+            Assert.AreEqual(expected, result, "ConvertToFile should return the expected formatted string");
+        }
+
+        [TestMethod]
+        public void LoadShapes_ShouldAddShapesToList()
+        {
+            // Arrange
+            var shapes = new Shapes();
+
+            // Create another instance of Shapes with mock shapes
+            var mockShape1 = new Mock<Shape>();
+            var mockShape2 = new Mock<Shape>();
+            var shapesToLoad = new Shapes();
+            shapesToLoad.GetType().GetField("_shapeList", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).SetValue(shapesToLoad, new System.ComponentModel.BindingList<Shape> { mockShape1.Object, mockShape2.Object });
+
+            // Act
+            shapes.LoadShapes(shapesToLoad);
+
+            // Assert
+            var shapeList = (System.ComponentModel.BindingList<Shape>)shapes.GetType().GetField("_shapeList", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance).GetValue(shapes);
+            Assert.AreEqual(2, shapeList.Count, "LoadShapes should add shapes to the list");
+        }
     }
 }

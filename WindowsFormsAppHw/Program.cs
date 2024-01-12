@@ -10,11 +10,17 @@ namespace WindowsFormsAppHomework
 {
     static class Program
     {
+        // resolve robot bug
         [DllImport("user32.dll")]
+
         private static extern bool SetProcessDPIAware();
+        // resolve robot bug
         [DllImport("user32.dll")]
+
         private static extern IntPtr LoadKeyboardLayout(string pwszKLID, uint Flags);
+        // resolve robot bug
         [DllImport("user32.dll", SetLastError = true)]
+
         private static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
         private static uint WM_INPUTLANGCHANGEREQUEST = 0x0050;
@@ -22,7 +28,7 @@ namespace WindowsFormsAppHomework
         private static string en_US = "00000409";
         private static uint KLF_ACTIVATE = 1;
 
-
+        // resolve robot bug
         private static void ChangeLanguage()
         {
             PostMessage((IntPtr)HWND_BROADCAST, WM_INPUTLANGCHANGEREQUEST, IntPtr.Zero, LoadKeyboardLayout(en_US, KLF_ACTIVATE));

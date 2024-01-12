@@ -29,10 +29,10 @@ namespace WindowsFormsAppHomework
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this._label1 = new System.Windows.Forms.Label();
+            this._label2 = new System.Windows.Forms.Label();
+            this._label3 = new System.Windows.Forms.Label();
+            this._label4 = new System.Windows.Forms.Label();
             this._textBox1 = new System.Windows.Forms.TextBox();
             this._textBox2 = new System.Windows.Forms.TextBox();
             this._textBox3 = new System.Windows.Forms.TextBox();
@@ -41,41 +41,41 @@ namespace WindowsFormsAppHomework
             this._buttonCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // label1
+            // _label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(59, 57);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(92, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "左上角座標X";
+            this._label1.AutoSize = true;
+            this._label1.Location = new System.Drawing.Point(59, 57);
+            this._label1.Name = "_label1";
+            this._label1.Size = new System.Drawing.Size(92, 15);
+            this._label1.TabIndex = 0;
+            this._label1.Text = "左上角座標X";
             // 
-            // label2
+            // _label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(268, 57);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(92, 15);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "左上角座標Y";
+            this._label2.AutoSize = true;
+            this._label2.Location = new System.Drawing.Point(268, 57);
+            this._label2.Name = "_label2";
+            this._label2.Size = new System.Drawing.Size(92, 15);
+            this._label2.TabIndex = 1;
+            this._label2.Text = "左上角座標Y";
             // 
-            // label3
+            // _label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(59, 180);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 15);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "右下角座標X";
+            this._label3.AutoSize = true;
+            this._label3.Location = new System.Drawing.Point(59, 180);
+            this._label3.Name = "_label3";
+            this._label3.Size = new System.Drawing.Size(92, 15);
+            this._label3.TabIndex = 2;
+            this._label3.Text = "右下角座標X";
             // 
-            // label4
+            // _label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(268, 180);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(92, 15);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "右下角座標Y";
+            this._label4.AutoSize = true;
+            this._label4.Location = new System.Drawing.Point(268, 180);
+            this._label4.Name = "_label4";
+            this._label4.Size = new System.Drawing.Size(92, 15);
+            this._label4.TabIndex = 3;
+            this._label4.Text = "右下角座標Y";
             // 
             // _textBox1
             // 
@@ -117,7 +117,7 @@ namespace WindowsFormsAppHomework
             this._buttonOk.TabIndex = 8;
             this._buttonOk.Text = "OK";
             this._buttonOk.UseVisualStyleBackColor = true;
-            this._buttonOk.Click += new System.EventHandler(this.ClickButtonOK);
+            this._buttonOk.Click += new System.EventHandler(this.ClickButtonOk);
             // 
             // _buttonCancel
             // 
@@ -140,10 +140,10 @@ namespace WindowsFormsAppHomework
             this.Controls.Add(this._textBox3);
             this.Controls.Add(this._textBox2);
             this.Controls.Add(this._textBox1);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this._label4);
+            this.Controls.Add(this._label3);
+            this.Controls.Add(this._label2);
+            this.Controls.Add(this._label1);
             this.Name = "DialogForm";
             this.Text = "DialogForm";
             this.ResumeLayout(false);
@@ -153,10 +153,10 @@ namespace WindowsFormsAppHomework
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label _label1;
+        private System.Windows.Forms.Label _label2;
+        private System.Windows.Forms.Label _label3;
+        private System.Windows.Forms.Label _label4;
         private System.Windows.Forms.TextBox _textBox1;
         private System.Windows.Forms.TextBox _textBox2;
         private System.Windows.Forms.TextBox _textBox3;

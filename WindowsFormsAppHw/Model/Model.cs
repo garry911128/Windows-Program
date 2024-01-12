@@ -69,7 +69,7 @@ namespace WindowsFormsAppHomework
             const string APPLICATION_NAME = "DrawAnyWhere";
             const string CLIENT_SECRET_FILE_NAME = "clientSecret.json";
             _service = new GoogleDriveService(APPLICATION_NAME, CLIENT_SECRET_FILE_NAME);
-            _solutionPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\..\\"));
+            _solutionPath = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Constants.TRIPLE_SPLASH));
             _filePath = Path.Combine(_solutionPath, "WindowsFormsAppHw", "bin", "Debug", "Garry's.txt");
         }
 
@@ -99,25 +99,19 @@ namespace WindowsFormsAppHomework
         // delete a shapes
         public virtual void DeletePage(int slideIndex, Shapes shapes)
         {
-            Console.WriteLine("In Model , now slide Index:" + SlideIndex);
-            Console.WriteLine("In Model , now pages Count:" + _pages.Count);
             if (slideIndex == _pages.Count - 1)
             {
-                SlideIndex = slideIndex - 1 ;
+                SlideIndex = slideIndex - 1;
             }
             _pages.Remove(shapes);
             _pageChanged(SlideIndex, Shapes.Action.Remove);
-            Console.WriteLine("In Model , now slide Index:" +  SlideIndex);
             NotifyObserver();
         }
 
         //undo
         public virtual void Undo()
         {
-            Console.WriteLine("In Model Undo , slide Index:" + SlideIndex);
-            Console.WriteLine("In Model Undo , pages count" +  _pages.Count);
             _commandManager.Undo(_canvasSize);
-            //_pageChanged(_commandManager.GetCommandSlideIndex());
             NotifyObserver();
         }
 
@@ -125,7 +119,6 @@ namespace WindowsFormsAppHomework
         public virtual void Redo()
         {
             _commandManager.Redo(_canvasSize);
-            //_pageChanged(_commandManager.GetCommandSlideIndex());
             NotifyObserver();
         }
 
@@ -142,8 +135,8 @@ namespace WindowsFormsAppHomework
         public virtual void ExecuteDeletePageCommand(int newSlideIndex)
         {
             Console.WriteLine("Delete page command Execute");
-            DeletePageCommand addPageCommand = new DeletePageCommand(this, _pages[SlideIndex], newSlideIndex);
-            _commandManager.Execute(addPageCommand, _canvasSize);
+            DeletePageCommand deletePageCommand = new DeletePageCommand(this, _pages[SlideIndex], newSlideIndex);
+            _commandManager.Execute(deletePageCommand, _canvasSize);
             NotifyObserver();
         }
 
@@ -181,9 +174,9 @@ namespace WindowsFormsAppHomework
         }
 
         // execute MoveCommand
-        public virtual void ExecuteResizeCommand(Point originTopLeftPoint, Point originBottomRightPoint, Point ReleasePoint)
+        public virtual void ExecuteResizeCommand(Point originTopLeftPoint, Point originBottomRightPoint, Point releasePoint)
         {
-            ResizeCommand resizeCommand = new ResizeCommand(this, GetSelectedShape(), originTopLeftPoint, originBottomRightPoint, ReleasePoint);
+            ResizeCommand resizeCommand = new ResizeCommand(this, GetSelectedShape(), originTopLeftPoint, originBottomRightPoint, releasePoint);
             resizeCommand.SetSlideIndex(SlideIndex);
             _commandManager.Execute(resizeCommand, _canvasSize);
             NotifyObserver();
@@ -228,7 +221,7 @@ namespace WindowsFormsAppHomework
                 _pages[SlideIndex].ClearSelectedShape();
                 NotifyObserver();
             }
-            else if(keyCode == Keys.Delete && _pages[SlideIndex].GetSelectedShape() == null)
+            else if (keyCode == Keys.Delete && _pages[SlideIndex].GetSelectedShape() == null)
             {
                 ExecuteDeletePageCommand(SlideIndex);
             }

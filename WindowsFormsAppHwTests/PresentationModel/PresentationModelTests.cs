@@ -204,5 +204,35 @@ namespace WindowsFormsAppHomework.PresentationModel.Tests
             Assert.IsTrue(propertyChangedNotified, "PropertyChanged event should be notified");
         }
 
+        [TestMethod]
+        public void ProcessSlideChange_ShouldSetSlideIndexAndCallModelSwitchSlide()
+        {
+            // Arrange
+            SetUp();
+            int newIndex = 42;
+
+            // Act
+            _presentationModel.ProcessSlideChange(newIndex);
+
+            // Assert
+            Assert.AreEqual(newIndex, _presentationModelPrivate.GetField("_slideIndex"));
+            modelMock.Verify(m => m.SwitchSlide(newIndex), Times.Once);
+        }
+
+        [TestMethod]
+        public void InsertPage_ShouldSetSlideIndexAndCallModelExecuteAddPageCommand()
+        {
+            // Arrange
+            SetUp();
+            int newIndex = 42;
+
+            // Act
+            _presentationModel.InsertPage(newIndex);
+
+            // Assert
+            Assert.AreEqual(newIndex, _presentationModelPrivate.GetField("_slideIndex"));
+            modelMock.Verify(m => m.ExecuteAddPageCommand(newIndex), Times.Once);
+        }
+
     }
 }

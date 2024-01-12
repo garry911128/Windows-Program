@@ -20,14 +20,14 @@ namespace WindowsFormsAppHomework
         }
 
         // click load
-        private void ClickLoadbutton(object sender, EventArgs e)
+        private void ClickLoadButton(object sender, EventArgs e)
         {
             _model.HandleLoad();
             Close();
         }
 
         // click cancel
-        private void ClickCancelbutton(object sender, EventArgs e)
+        private void ClickCancelButton(object sender, EventArgs e)
         {
             Close();
         }

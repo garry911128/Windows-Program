@@ -94,8 +94,10 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Model\Command\AddCommandTests.cs" />
+    <Compile Include="Model\Command\AddPageCommandTests.cs" />
     <Compile Include="Model\Command\CommandManagerTests.cs" />
     <Compile Include="Model\Command\DeleteCommandTests.cs" />
+    <Compile Include="Model\Command\DeletePageCommandTests.cs" />
     <Compile Include="Model\Command\DrawCommandTests.cs" />
     <Compile Include="Model\Command\MoveCommandTests.cs" />
     <Compile Include="Model\EllipseTests.cs" />

@@ -21,7 +21,7 @@ namespace WindowsFormsAppHomework
                 _fileId = await _service.UploadFile(_filePath, Constants.TEXT_PLAIN);
             else
                 _service.UpdateFile("Garry's.txt", _fileId, Constants.TEXT_PLAIN);
-            Thread.Sleep(10);
+            Thread.Sleep(10000);
         }
 
         // load pages from drive
@@ -38,7 +38,7 @@ namespace WindowsFormsAppHomework
         {
             SlideIndex = 0;
             int count = _pages.Clear();
-            for (int i=0; i < count; i++)
+            for ( int i=0; i < count; i ++)
             {
                 _pageChanged(0, Shapes.Action.Remove);
             }
@@ -66,19 +66,17 @@ namespace WindowsFormsAppHomework
             }
         }
 
-
         // decode
         public virtual void LoadShapesIntoList(string shapesData, Size canvasSize, Shapes shapes)
         {
             var pattern = @"\{([^,]+),\{([^,]+),([^,]+),([^,]+),([^}]+)\}\}";
-            int index = 0;
             foreach (Match match in Regex.Matches(shapesData, pattern))
             {
                 var type = match.Groups[1].Value.Trim();
-                Point topLeftPoint = new Point(double.Parse(match.Groups[2].Value.Trim())*_canvasSize.Width, double.Parse(match.Groups[3].Value.Trim())*_canvasSize.Height);
+                Point topLeftPoint = new Point(double.Parse(match.Groups[2].Value.Trim()) * _canvasSize.Width, double.Parse(match.Groups[3].Value.Trim()) * _canvasSize.Height);
                 Point bottomRightPoint = new Point(double.Parse(match.Groups[4].Value.Trim()) * _canvasSize.Width, double.Parse(match.Groups[5].Value.Trim()) * _canvasSize.Height);
-                //Console.WriteLine(type + "," + topLeftPoint + "," + bottomRightPoint);
-                shapes.IncreaseShapeToList(_shapeFactory.CreateShape(type, topLeftPoint, bottomRightPoint.X - topLeftPoint.X, bottomRightPoint.Y - topLeftPoint.Y), index);
+                Console.WriteLine(type + "," + topLeftPoint + "," + bottomRightPoint);
+                shapes.IncreaseShapeToList(_shapeFactory.CreateShape(type, topLeftPoint, bottomRightPoint.X - topLeftPoint.X, bottomRightPoint.Y - topLeftPoint.Y), -1);
             }
         }
 

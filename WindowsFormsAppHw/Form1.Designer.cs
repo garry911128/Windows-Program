@@ -233,7 +233,7 @@ namespace WindowsFormsAppHomework
             this.toolStripButtonAddNewSlide.Name = "toolStripButtonAddNewSlide";
             this.toolStripButtonAddNewSlide.Size = new System.Drawing.Size(29, 28);
             this.toolStripButtonAddNewSlide.Text = "toolStripButtonAddNewSlide";
-            this.toolStripButtonAddNewSlide.Click += new System.EventHandler(this.toolStripButtonAddNewSlide_Click);
+            this.toolStripButtonAddNewSlide.Click += new System.EventHandler(this.ClickAddNewSlidetoolStripButton);
             // 
             // _toolStripButtonUndo
             // 

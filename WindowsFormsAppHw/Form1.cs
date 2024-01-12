@@ -145,7 +145,6 @@ namespace WindowsFormsAppHomework
             UpdateUndoRedoButton();
         }
 
-
         //when we move mouse in panel
         public void HandleCanvasMoved(object sender, System.Windows.Forms.MouseEventArgs e)
         {
@@ -275,24 +274,13 @@ namespace WindowsFormsAppHomework
         }
 
         // Click add slide
-        private void toolStripButtonAddNewSlide_Click(object sender, EventArgs e)
+        private void ClickAddNewSlidetoolStripButton(object sender, EventArgs e)
         {
-            //Button button = new Button();
-            ////button.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            //var width = _splitContainer1.Panel1.Width - _splitContainer1.Panel1.Margin.Horizontal;
-            //var height = (int)(_splitContainer1.Panel1.Width * Constants.WINDOWS_RATIO);
-            //button.Size = new Size(width, height);
-            //button.Left = (int)((_splitContainer1.Panel1.Width - button.Width) / Constants.TWO);
-            //button.Click += HandleClickPage;
-            //button.Paint += HandleButtonPaint;
-            //button.Tag = _model.SlideIndex;
-            //flowLayoutPanel1.Controls.Add(button);
-            //flowLayoutPanel1.Controls.SetChildIndex(button, _model.SlideIndex + 1);
             _presentationModel.InsertPage(_model.SlideIndex + 1);
-            //_dataGridViewRight.DataSource = _model.GetShapeList();
             UpdateUndoRedoButton();
         }
 
+        //switch slide
         public void HandleClickPage(object sender, EventArgs e)
         {
             var button = (Button)sender;
@@ -302,6 +290,7 @@ namespace WindowsFormsAppHomework
             _dataGridViewRight.DataSource = _model.GetShapeList();
         }
 
+        // action to change form
         public void HandlePageChange(int slideIndex, Shapes.Action actionType)
         {
             switch (actionType)
@@ -343,7 +332,6 @@ namespace WindowsFormsAppHomework
             button.Height = height;
             button.Left = (int)((panel1Width - button.Width) / Constants.TWO);
             button.Name = "Slide";
-            //button.BackColor = Color.White;
             button.BackgroundImageLayout = ImageLayout.Stretch;
             button.Click += HandleClickPage;
             return button;
@@ -356,8 +344,6 @@ namespace WindowsFormsAppHomework
             {
                 return;
             }
-            Console.WriteLine("Remove Slide Index in Form" + slideIndex);
-            Console.WriteLine("Now Slide Index in Form" + _model.SlideIndex);
             flowLayoutPanel1.Controls.RemoveAt(slideIndex);
             _model.SlideIndex = slideIndex;
             flowLayoutPanel1.Controls[slideIndex].Focus();
@@ -372,11 +358,13 @@ namespace WindowsFormsAppHomework
             flowLayoutPanel1.Controls[SlideIndex].Focus();
         }
 
+        //Save picture
         private void ClickToolStripSaveButton(object sender, EventArgs e)
         {
             _saveDialog.ShowDialog();
         }
 
+        //Load picture
         private void ClickToolStripLoadButton(object sender, EventArgs e)
         {
             _loadDialog.ShowDialog();

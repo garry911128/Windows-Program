@@ -16,7 +16,6 @@ namespace WindowsFormsAppHomework
 
         public AddPageCommand(Model model, Shapes shapes, int slideIndex)
         {
-            Console.WriteLine("Add page init" + slideIndex);
             _shapes = shapes;
             _model = model;
             _slideIndex = slideIndex;
@@ -33,7 +32,6 @@ namespace WindowsFormsAppHomework
         public void UndoExecute(Size nowSize)
         {
             SetSize(nowSize);
-            Console.WriteLine("Add Page Undo, silde Index:" +  _slideIndex);
             _model.DeletePage(_slideIndex, _shapes);
         }
 

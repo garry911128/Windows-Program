@@ -73,5 +73,17 @@ namespace WindowsFormsAppHomework.Tests
             Size canvasSize = (Size)privateMoveCommand.GetField("_canvasSize");
             Assert.AreEqual(newCanvasSize, canvasSize);
         }
+
+        [TestMethod]
+        public void GetSlideIndex_ShouldReturnCorrectSlideIndex()
+        {
+            // Arrange
+            var modelMock = new Mock<Model>();
+            var shapeMock = new Mock<Shape>();
+            int slideIndex = 2;
+            var moveCommand = new MoveCommand(modelMock.Object, shapeMock.Object, slideIndex);
+            int result = moveCommand.GetSlideIndex();
+            Assert.AreEqual(slideIndex, result, "GetSlideIndex should return the correct slide index");
+        }
     }
 }

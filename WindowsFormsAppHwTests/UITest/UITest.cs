@@ -38,7 +38,7 @@ namespace WindowsFormsAppHomework.Tests
         [TestCleanup()]
         public void Teardown()
         {
-           //_robot.ClickButton("關閉");
+           _robot.ClickButton("關閉");
         }
 
         // Move pointer to point
@@ -234,6 +234,47 @@ namespace WindowsFormsAppHomework.Tests
             Actions actions = new Actions(_robot.GetDriver());
             actions.SendKeys(OpenQA.Selenium.Keys.Delete).Perform();
             Assert.AreEqual(1, GetSlideCount());
+        }
+
+        [TestMethod]
+        public void AssertSave()
+        {
+            _robot.ClickButton("toolStripButtonAddNewSlide");
+            _robot.SwitchTo("flowLayoutPanel1");
+            WindowsElement flowLayoutPanel1 = _robot.FindElementByName("flowLayoutPanel1");
+            IReadOnlyCollection<AppiumWebElement> slides = flowLayoutPanel1.FindElementsByAccessibilityId("Slide");
+            slides.ElementAt(1).Click();
+            DrawShape("矩形", new Point(100, 100), new Point(150, 150));
+            DrawShape("橢圓形", new Point(150, 60), new Point(200, 150));
+            slides.ElementAt(0).Click();
+            DrawShape("線", new Point(100, 100), new Point(150, 150));
+            DrawShape("橢圓形", new Point(150, 60), new Point(200, 150));
+            _robot.ClickButton("toolStripButtonSave");
+
+            var savedialogForm = _robot.FindElementByName("SaveDialogForm");
+            var saveButton = savedialogForm.FindElementByAccessibilityId("_button1");
+            saveButton.Click();
+            _robot.Sleep(5);
+            slides.ElementAt(0).Click();
+            Actions actions = new Actions(_robot.GetDriver());
+            actions.SendKeys(OpenQA.Selenium.Keys.Delete).Perform();
+            _robot.ClickButton("toolStripButtonLoad");
+            var loaddialogForm = _robot.FindElementByName("LoadDialogForm");
+            var loadButton = loaddialogForm.FindElementByAccessibilityId("_button1");
+            loadButton.Click();
+            _robot.Sleep(5);
+
+            flowLayoutPanel1 = _robot.FindElementByName("flowLayoutPanel1");
+            slides = flowLayoutPanel1.FindElementsByAccessibilityId("Slide");
+            slides.ElementAt(0).Click();
+            string[] expectedData1 = { "刪除", "線", "(100,100),(150,150)" };
+            string[] expectedData2 = { "刪除", "橢圓形", "(150,60.0000000000002),(200,150)" };
+            _robot.AssertDataGridViewRowDataBy("_dataGridViewRight", 0, expectedData1);
+            _robot.AssertDataGridViewRowDataBy("_dataGridViewRight", 1, expectedData2);
+            slides.ElementAt(1).Click();
+            string[] expectedData3 = { "刪除", "矩形", "(100,100),(150,150)" };
+            _robot.AssertDataGridViewRowDataBy("_dataGridViewRight", 0, expectedData3);
+            _robot.AssertDataGridViewRowDataBy("_dataGridViewRight", 1, expectedData2);
         }
 
     }

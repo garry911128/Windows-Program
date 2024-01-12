@@ -46,5 +46,23 @@ namespace WindowsFormsAppHomework.Tests
             // Assert
             modelMock.Verify(m => m.DeleteShapeOfStack(0, indexOfStack), Times.Once);
         }
+
+        [TestMethod]
+        public void GetSlideIndex_ShouldReturnCorrectSlideIndex()
+        {
+            // Arrange
+            var modelMock = new Mock<Model>();
+            var shapeMock = new Mock<Shape>();
+            int slideIndex = 2;
+            int indexOfStack = 1;
+
+            var drawCommand = new DrawCommand(modelMock.Object, shapeMock.Object, slideIndex, indexOfStack);
+
+            // Act
+            int result = drawCommand.GetSlideIndex();
+
+            // Assert
+            Assert.AreEqual(slideIndex, result, "GetSlideIndex should return the correct slide index");
+        }
     }
 }

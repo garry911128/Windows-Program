@@ -26,6 +26,7 @@ namespace WindowsFormsAppHomework
             InitializeComponent();
         }
 
+        // construct
         public void SetupDialog(Size canvasSize, string shapeName, Model model)
         {
             _canvasSize = canvasSize;
@@ -34,7 +35,8 @@ namespace WindowsFormsAppHomework
             this._buttonOk.Enabled = false;
         }
 
-        private void ClickButtonOK(object sender, EventArgs e)
+        // Click Ok
+        private void ClickButtonOk(object sender, EventArgs e)
         {
             _model.ExecuteAddCommand(_shapeName, new Point(_left, _top), new Point(_right, _bottom));
             _textBox1.Text = "";
@@ -44,11 +46,13 @@ namespace WindowsFormsAppHomework
             this.Close();
         }
 
+        // Click Cancel
         private void ClickButtonCancel(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        // change top left X in text box
         private void ChangedTextInTextBox1(object sender, EventArgs e)
         {
             try
@@ -59,8 +63,10 @@ namespace WindowsFormsAppHomework
             {
                 _left = 0;
             }
-            notifyTextBoxChanged();
+            NotifyTextBoxChanged();
         }
+
+        // change top left Y in text box
         private void ChangedTextInTextBox2(object sender, EventArgs e)
         {
             try
@@ -71,9 +77,10 @@ namespace WindowsFormsAppHomework
             {
                 _top = 0;
             }
-            notifyTextBoxChanged();
+            NotifyTextBoxChanged();
         }
 
+        // change text in bottom right X text box
         private void ChangedTextInTextBox3(object sender, EventArgs e)
         {
             try
@@ -84,9 +91,10 @@ namespace WindowsFormsAppHomework
             {
                 _right = 0;
             }
-            notifyTextBoxChanged();
+            NotifyTextBoxChanged();
         }
 
+        // change text in bottom right Y textbox
         private void ChangedTextInTextBox4(object sender, EventArgs e)
         {
             try
@@ -97,17 +105,12 @@ namespace WindowsFormsAppHomework
             {
                 _bottom = 0;
             }
-            notifyTextBoxChanged();
+            NotifyTextBoxChanged();
         }
 
-        private void notifyTextBoxChanged()
+        // observer
+        private void NotifyTextBoxChanged()
         {
-            //Console.WriteLine("top:" + _top + " Left:" + _left + "  Right" + _right + " bottom" + _bottom);
-            //Console.WriteLine("1" + (_left >= 0 && _left <= _canvasSize.Width));
-            //Console.WriteLine("2" +  (_top >= 0 && _top <= _canvasSize.Height));
-            //Console.WriteLine("3" +  (_right >= 0 && _right <= _canvasSize.Width));
-            //Console.WriteLine("4" + (_bottom >= 0 && _bottom <= _canvasSize.Height));
-            //Console.WriteLine("5" + (_left < _right && _top < _bottom));
             if (_left >= 0 && _left <= _canvasSize.Width &&
                 _top >= 0 && _top <= _canvasSize.Height &&
                 _right >= 0 && _right <= _canvasSize.Width &&

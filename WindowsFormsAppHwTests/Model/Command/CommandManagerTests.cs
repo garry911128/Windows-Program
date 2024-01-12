@@ -96,5 +96,34 @@ namespace WindowsFormsAppHomework.Tests
             commandManager.Undo(new Size(0, 0));
         }
 
+        [TestMethod]
+        public void GetCommandSlideIndex_ShouldReturnCurrentSlideIndex()
+        {
+            var commandManager = new CommandManager();
+            PrivateObject privateCommandManager = new PrivateObject(commandManager);
+            var commandMock = new Mock<ICommand>();
+            int expectedSlideIndex = 42;
+            privateCommandManager.SetField("_currentSlide", expectedSlideIndex);
+            int result = commandManager.GetCommandSlideIndex();
+            Assert.AreEqual(expectedSlideIndex, result, "GetCommandSlideIndex should return the current slide index");
+        }
+
+        [TestMethod]
+        public void Clear_ShouldClearUndoAndRedoStacksAndResetCurrentSlideIndex()
+        {
+            var commandManager = new CommandManager();
+            PrivateObject privateCommandManager = new PrivateObject(commandManager);
+            var commandMock = new Mock<ICommand>();
+            commandManager.Execute(commandMock.Object, new Size(10, 10));
+            commandManager.Undo(new Size(10, 10));
+            commandManager.Redo(new Size(10, 10));
+            commandManager.Clear();
+            Stack<ICommand> undoStack = (Stack<ICommand>)privateCommandManager.GetField("_undo");
+            Stack<ICommand> redoStack = (Stack<ICommand>)privateCommandManager.GetField("_redo");
+            int currentSlideIndex = (int)privateCommandManager.GetField("_currentSlide");
+            Assert.AreEqual(0, undoStack.Count, "Undo stack should be cleared");
+            Assert.AreEqual(0, redoStack.Count, "Redo stack should be cleared");
+            Assert.AreEqual(0, currentSlideIndex, "Current slide index should be reset to 0");
+        }
     }
 }

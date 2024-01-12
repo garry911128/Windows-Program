@@ -10,6 +10,7 @@ namespace WindowsFormsAppHomework
     {
         public const string LEFT_SMALL_BRACKET = "(";
         public const string RIGHT_SMALL_BRACKET = ")";
+        public const string TRIPLE_SPLASH = "..\\..\\..\\";
         public const string DOT = ",";
         public const string SPACE = " ";
         public const string LEFT_CURLY_BRACKET = "{";
